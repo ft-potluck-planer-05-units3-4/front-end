@@ -19,9 +19,9 @@ function Nav() {
 	    <Link to='/attendee'>
 	      Attendee Menu
 	    </Link>
-	    <button>
+	    <Link to='/add-event'>
 	      Add Potluck
-	    </button>
+	    </Link>
 	  </Route>
 	</Switch>
       </header>
