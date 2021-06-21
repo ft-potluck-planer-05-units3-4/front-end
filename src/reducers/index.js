@@ -1,4 +1,7 @@
 const initialState = {
+  attending: [],
+  invites: [],
+  events: [],
   isLoggedIn: false
 };
 

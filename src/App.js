@@ -10,6 +10,7 @@ import PrivateRoute from './utils/privateRoute';
 import LoginSignup from './components/Login-Signup';
 import Inviting from './components/Inviting';
 import Nav from './components/Nav';
+import AddEvent from './components/AddEvent';
 
 
 const store = createStore(rootReducer);
@@ -20,7 +21,10 @@ function App() {
       <Router>
 	<div className="App">
      	  <Switch>
-	    <PrivateRoute path='/organizer' component={Nav}/>
+	    <Route path='/add-event' component={AddEvent}/>
+	    <Route path='/invite-to/:id' component={Inviting}/>
+	    <Route path='/organizer' component={Nav}/>
+	    <Route path='/attendee' component={Nav}/>
 	    <Route path='/' component={LoginSignup}/>
      	  </Switch>
 	</div>

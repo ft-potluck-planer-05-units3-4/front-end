@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
 import InviteCard from './InviteCard';
 
 function InvitedList({invites}){
@@ -10,4 +10,8 @@ function InvitedList({invites}){
   )
 }
 
-export default InvitedList;
+const state2props = (state) => ({
+  invites: state.invites
+});
+
+export default connect(state2props)(InvitedList);
