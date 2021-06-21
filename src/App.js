@@ -11,7 +11,7 @@ import LoginSignup from './components/Login-Signup';
 import Inviting from './components/Inviting';
 import Nav from './components/Nav';
 import AddEvent from './components/AddEvent';
-
+import EditEvent from './components/EditEvent';
 
 const store = createStore(rootReducer);
 
@@ -23,6 +23,7 @@ function App() {
      	  <Switch>
 	    <Route path='/add-event' component={AddEvent}/>
 	    <Route path='/invite-to/:id' component={Inviting}/>
+	    <Route path='/edit-event/:id' component={EditEvent}/>
 	    <Route path='/organizer' component={Nav}/>
 	    <Route path='/attendee' component={Nav}/>
 	    <Route path='/' component={LoginSignup}/>
