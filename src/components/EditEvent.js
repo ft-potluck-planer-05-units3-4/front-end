@@ -11,9 +11,9 @@ function EditEvent() {
   return (
     <form>
       <input name='title'/>
-      <input name='title'/>
-      <input name='title'/>
-      <input name='title'/>
+      <input name='location'/>
+      <input name='start'/>
+      <input name='end'/>
       <button>
 	Submit
       </button>
