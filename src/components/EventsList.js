@@ -1,18 +1,20 @@
-import React, {useState} from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from "react";
+import { connect } from "react-redux";
 
-import EventCard from './EventCard';
+import EventCard from "./EventCard";
 
-function EventsList({events}) {
+function EventsList({ events }) {
   return (
-    <div className='organizer'>
-      { events.map(event => <EventCard key={event.id}/>)}
+    <div className="organizer">
+      {events.map((event) => (
+        <EventCard key={event.id} />
+      ))}
     </div>
-  )
+  );
 }
 
 const state2props = (state) => ({
-  events: state.events
+  events: state.events,
 });
 
 export default connect(state2props)(EventsList);

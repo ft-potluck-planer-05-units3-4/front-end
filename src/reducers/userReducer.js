@@ -1,9 +1,9 @@
 const initialState = {};
 
 const userReducer = (state, action) => {
-  switch(action.type) {
-  default:
-    return state;
+  switch (action.type) {
+    default:
+      return state;
   }
 };
 

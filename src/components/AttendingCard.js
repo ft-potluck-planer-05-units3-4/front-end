@@ -1,18 +1,17 @@
-import React from 'react';
+import React from "react";
 
-import FoodRequestList from './FoodRequestList';
+import FoodRequestList from "./FoodRequestList";
 
-function AttendingCard({event}) {
+function AttendingCard({ event }) {
   return (
-    <div className='attending-card'>
+    <div className="attending-card">
       <h3>{event.title}</h3>
       <p>Location: {event.location}</p>
       <p>Starts: {event.start}</p>
       <p>Ends: {event.end}</p>
-      <FoodRequestList foodRequests={event.food}/>
+      <FoodRequestList foodRequests={event.food} />
     </div>
-  )
+  );
 }
 
 export default AttendingCard;
-    
