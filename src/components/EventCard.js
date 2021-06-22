@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { deleteEvent } from '../actions/eventActions';
-import FoodList from './FoodList';
 
 function EventCard(props){
   const { event } = props;
