@@ -10,9 +10,9 @@ function EventCard(props){
     <div className='event-card'>
       <h3>{event.title}</h3>
       <p>Location: {event.location}</p>
-      <p>Start: {event.start}</p>
-      <p>End: {event.end}</p>
-      <ul>
+      <p>Date: {event.month} {event.day}, {event.year}</p>
+      <p>Times: {event.start_time}-{event.end_time}</p>
+      {/*      <ul>
 	<li>
 	  Who's Invited
 	</li>
@@ -30,7 +30,7 @@ function EventCard(props){
       <Link to={`/invite-to/${event.id}`}>
 	Invite More
       </Link>
-    
+       */}
     </div>
   );
 }
