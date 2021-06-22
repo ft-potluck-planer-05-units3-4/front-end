@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router';
-import { connect } from 'react-redux';
+import { useParams } from 'react-router';
+// import { useHistory, useParams } from 'react-router';
+// import { connect } from 'react-redux';
 
 import axios from 'axios';
 const api = axios.create({
@@ -11,7 +12,7 @@ const api = axios.create({
 });
 
 function Inviting() {
-  const { push } = useHistory();
+  // const { push } = useHistory();
   const { id } = useParams();
   const [users, setUsers] = useState([]);
   useEffect(() => {
@@ -26,7 +27,7 @@ function Inviting() {
 	setUsers(returnUsers);
       })
       .catch(alert);
-  }, []);
+  }, [id]);
 
   const onChange = (e) => {
     const changedUser = users.find(user => user.id === Number(e.target.name));
