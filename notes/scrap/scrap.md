@@ -47,22 +47,3 @@ tree -I 'node_modules' -f
         ├── ./src/utils/axiosWauth.js
         └── ./src/utils/privateRoute.js
 ```
-
-
-git init
-git add .
-git commit -m"update"
-git push -u origin bryan-guner
-
-
-git init
-git add .
-git commit -m"axios-w-auth"
-git push -u origin bryan-guner
-
-
-
-git init
-git add .
-git commit -m"update"
-git push -u origin main

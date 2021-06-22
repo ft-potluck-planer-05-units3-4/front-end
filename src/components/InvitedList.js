@@ -1,13 +1,19 @@
-import React from 'react';
+import React from "react";
+import { connect } from "react-redux";
+import InviteCard from "./InviteCard";
 
-import InviteCard from './InviteCard';
-
-function InvitedList(){
+function InvitedList({ invites }) {
   return (
-    <div className='invites'>
-      {invites.map(invite => <InviteCard key={invite.id} invite={invite}/>)}
+    <div className="invites">
+      {invites.map((invite) => (
+        <InviteCard key={invite.id} invite={invite} />
+      ))}
     </div>
-  )
+  );
 }
 
-export default InvitedList;
+const state2props = (state) => ({
+  invites: state.invites,
+});
+
+export default connect(state2props)(InvitedList);

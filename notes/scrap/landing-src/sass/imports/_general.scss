@@ -18,8 +18,8 @@ a {
   border-bottom: 2px solid _palette(accent);
   color: _palette(primary);
   text-decoration: none;
-  -webkit-transition: border .3s ease, color .3s ease;
-  transition: border .3s ease, color .3s ease;
+  -webkit-transition: border 0.3s ease, color 0.3s ease;
+  transition: border 0.3s ease, color 0.3s ease;
 
   &:hover {
     border-color: currentColor;
@@ -122,7 +122,7 @@ blockquote {
   padding-left: 1.25em;
 
   &:first-child {
-    margin-top: 0
+    margin-top: 0;
   }
 
   p {
@@ -279,23 +279,23 @@ select {
   &:before,
   &:after {
     border: solid transparent;
-    border-width: .3125em;
+    border-width: 0.3125em;
     box-sizing: border-box;
     content: "";
     position: absolute;
     right: 10px;
     top: 50%;
     z-index: 1;
-  } 
+  }
 
   &:before {
     border-top-color: _palette(meta);
-    margin-top: .125em;
+    margin-top: 0.125em;
   }
 
   &:after {
     border-bottom-color: _palette(meta);
-    margin-top: -.75em;
+    margin-top: -0.75em;
   }
 }
 
@@ -303,7 +303,7 @@ select {
   padding-left: 24px;
   position: relative;
 
-  input[type=checkbox] {
+  input[type="checkbox"] {
     height: 1.5em;
     left: 0;
     position: absolute;
@@ -327,8 +327,8 @@ input[type="reset"],
   font-weight: bold;
   line-height: 1.2;
   padding: 0.9em 30px;
-  -webkit-transition: .3s ease;
-  transition: .3s ease;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
 
   &:hover,
   &:focus,
