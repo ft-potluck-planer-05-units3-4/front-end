@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function AddEvent(){
+export function AddEvent(){
   const [formVal, setFormVal] = useState({
     title: '',
     start: '',
@@ -16,6 +16,6 @@ function AddEvent(){
       <input name='location'/>
       <button>Submit</button>
     </form>
-}
+  )
 
 export default AddEvent;
