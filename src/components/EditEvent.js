@@ -34,7 +34,7 @@ function EditEvent(props){
 	setFormVal(res.data);
       })
       .catch(alert)
-  }, []);
+  }, [id]);
 
   const onChange = (e) => {
     setFormVal({

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import FoodRequestList from './FoodRequestList';
+// import FoodRequestList from './FoodRequestList';
 
 function AttendingCard({event}) {
   return (

@@ -1,4 +1,3 @@
-
 import './App.css';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -7,8 +6,7 @@ import { createStore } from 'redux';
 
 import rootReducer from './reducers';
 
-import PrivateRoute from './utils/privateRoute';
-import LoginSignup from './components/Login-Signup';
+// import PrivateRoute from './utils/privateRoute';
 import Inviting from './components/Inviting';
 import Nav from './components/Nav';
 import AddEvent from './components/AddEvent';

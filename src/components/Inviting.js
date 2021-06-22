@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 
 import axios from 'axios';
 const api = axios.create({
@@ -26,7 +26,7 @@ function Inviting() {
 	setUsers(returnUsers);
       })
       .catch(alert);
-  }, []);
+  }, [id]);
 
   const onChange = (e) => {
     const changedUser = users.find(user => user.id === Number(e.target.name));
@@ -42,6 +42,7 @@ function Inviting() {
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(users);
+    push('/organizer');
   };
   
   return (

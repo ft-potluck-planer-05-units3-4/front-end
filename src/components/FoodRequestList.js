@@ -1,7 +1,7 @@
-import React from 'react';
+// import React from 'react';
 
 function FoodRequestList() {
-  return "BBBB";
+  return "Please Replace the Food Request List";
 }
 
 export default FoodRequestList;
