@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route, Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import EventsList from './EventsList';
@@ -50,6 +50,9 @@ function Nav() {
 	  </Route>
 	  <Route path='/organizer'>
 	    <EventsList/>
+	  </Route>
+	  <Route path='/'>
+	    <Redirect to='/organizer'/> {/* Replace Me */}
 	  </Route>
 	</Switch>
       </main>

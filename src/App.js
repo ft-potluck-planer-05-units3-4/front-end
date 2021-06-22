@@ -25,9 +25,7 @@ function App() {
 	    <Route path='/add-event' component={AddEvent}/>
 	    <Route path='/invite-to/:id' component={Inviting}/>
 	    <Route path='/edit-event/:id' component={EditEvent}/>
-	    <Route path='/organizer' component={Nav}/>
-	    <Route path='/attendee' component={Nav}/>
-	    <Route path='/' component={LoginSignup}/>
+	    <Route path='/' component={Nav}/>
      	  </Switch>
 	</div>
       </Router>
