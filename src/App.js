@@ -7,7 +7,7 @@ import { createStore } from 'redux';
 
 import rootReducer from './reducers';
 
-import PrivateRoute from './utils/privateRoute';
+// import PrivateRoute from './utils/privateRoute';
 import LoginSignup from './components/Login-Signup';
 import Inviting from './components/Inviting';
 import Nav from './components/Nav';
