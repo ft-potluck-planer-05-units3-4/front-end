@@ -1,14 +1,27 @@
 # Front End:
 
+
+## Quick-links:
+
+
+
+
+
+
+
+
+
+
+
 # Potluck Planner
 
 ## ☝️ **Pitch**
 
-If you have ever tried to organize a potluck through text messages, online to-do lists or spreadsheets, you'll understand why this app is essential. 
+If you have ever tried to organize a potluck through text messages, online to-do lists or spreadsheets, you'll understand why this app is essential.
 
 In the world of social gatherings and potlucks the "Potluck Planner" is king. This is your place for all things pot luck.
 
-## ✅  **MVP**
+## ✅ **MVP**
 
 1. As an `organizer` I can create an upcoming `potluck` and invite my friends to attend
 
@@ -27,3 +40,8 @@ In the world of social gatherings and potlucks the "Potluck Planner" is king. Th
 1. Add a reminders functionality that allows users to link up their upcoming `date`s to their Google calendar.
 
 2. Ability to upload multiple `photos` from the potluck gathering, like a photo gallery for a past event.
+
+
+
+
+![](component-hierarchy.png)
