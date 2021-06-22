@@ -12,11 +12,11 @@ const api = axios.create({
 });
 
 function EventsList(props) {
+  console.log(props.events);
   const [events, setEvents] = useState([]);
   useEffect(() => {
     api.get('/events')
       .then(res => {
-	console.log(res);
 	setEvents(res.data);
       })
       .catch(alert);
@@ -29,7 +29,7 @@ function EventsList(props) {
 }
 
 const state2props = (state) => ({
-  events: state.events
+  events: state.events.events
 });
 
 export default connect(state2props)(EventsList);

@@ -17,7 +17,11 @@ function eventReducer(state = initialState, action) {
       ...state,
       events: [...state.events, action.payload]
     });
-    
+  case "SET_EVENTS":
+    return ({
+      ...state,
+      events: action.payload
+    });
   default:
     return state;
   }
