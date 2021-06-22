@@ -2,13 +2,13 @@ const initialState = {
   attending: [],
   invites: [],
   events: [],
-  isLoggedIn: false,
+  isLoggedIn: false
 };
 
 function rootReducer(state = initialState, action) {
-  switch (action.type) {
-    default:
-      return state;
+  switch(action.type){
+  default:
+    return state;
   }
 }
 
