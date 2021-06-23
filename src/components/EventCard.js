@@ -49,11 +49,21 @@ function EventCard(props){
 	});	
       })
       .catch(alert);
-    alert('Please replace me with an action');
   };
 
-  const onDelFood = () => {
-    alert('Please Replace Me');
+  const onDelFoodMaker = (id) => {
+    const onDelFood = () => {
+      api.delete(`/food/${id}`)
+	.then(res => {
+	  const newFood = event.food.filter(item => item.id !== id);
+	  props.editEvent({
+	    ...event,
+	    food: newFood
+	  });
+	})
+	.catch(alert);
+    };
+    return onDelFood;
   };
 
   return (
@@ -75,7 +85,7 @@ function EventCard(props){
 	    return (
 	      <li key={item.id}>
 		{item.name}, {item.quantity}
-		<button onClick={onDelFood}>&times;</button>
+		<button onClick={onDelFoodMaker(item.id)}>&times;</button>
 	      </li>
 	    );
 	  })}
