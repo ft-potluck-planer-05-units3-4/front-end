@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { deleteEvent } from '../actions/eventActions';
+import { deleteEvent, editEvent } from '../actions/eventActions';
 
 import AddFoodForm from './AddFoodForm';
 
@@ -42,11 +42,20 @@ function EventCard(props){
       ...newFood,
       eventID: event.id
     })
-      .then(console.log)
+      .then(res => {
+	props.editEvent({
+	  ...event,
+	  food: [...event.food, res.data.food]
+	});	
+      })
       .catch(alert);
     alert('Please replace me with an action');
   };
-  
+
+  const onDelFood = () => {
+    alert('Please Replace Me');
+  };
+
   return (
     <div className='event-card'>
       <h3>{event.title}</h3>
@@ -62,7 +71,14 @@ function EventCard(props){
       <div className='food-list'>
 	<h5>Food Requests</h5>
 	<ul>
-	  { event.food.map(item => <li key={item.id}>{item.name}, {item.quantity}</li>)}
+	  { event.food.map(item => {
+	    return (
+	      <li key={item.id}>
+		{item.name}, {item.quantity}
+		<button onClick={onDelFood}>&times;</button>
+	      </li>
+	    );
+	  })}
 	</ul>
       </div>
       <AddFoodForm onAddFood={onAddFood}/>
@@ -91,4 +107,4 @@ function EventCard(props){
   );
 }
 
-export default connect(null, { deleteEvent })(EventCard);
+export default connect(null, { deleteEvent, editEvent })(EventCard);

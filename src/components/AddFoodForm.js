@@ -30,6 +30,7 @@ function AddFoodForm({onAddFood}) {
       ...formVal,
       quantity: Number(formVal.quantity)
     });
+    setOpen(false);
   };
   
   return (Open ? (
