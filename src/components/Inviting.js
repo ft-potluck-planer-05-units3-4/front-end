@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router';
-// import { useHistory, useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 // import { connect } from 'react-redux';
 
 import axios from 'axios';
@@ -12,7 +11,7 @@ const api = axios.create({
 });
 
 function Inviting() {
-  // const { push } = useHistory();
+  const { push } = useHistory();
   const { id } = useParams();
   const [users, setUsers] = useState([]);
   useEffect(() => {
@@ -43,6 +42,7 @@ function Inviting() {
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(users);
+    push('/organizer');
   };
   
   return (

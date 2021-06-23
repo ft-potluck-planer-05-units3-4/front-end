@@ -1,15 +1,15 @@
 import React from 'react';
 
-import FoodRequestList from './FoodRequestList';
+// import FoodRequestList from './FoodRequestList';
 
 function AttendingCard({event}) {
   return (
     <div className='attending-card'>
       <h3>{event.title}</h3>
       <p>Location: {event.location}</p>
-      <p>Starts: {event.start}</p>
-      <p>Ends: {event.end}</p>
-      <FoodRequestList foodRequests={event.food}/>
+      <p>Date: {event.month} {event.day}, {event.year}</p>
+      <p>Time: {event.start_time}-{event.end_time}</p>
+      {/* <FoodRequestList foodRequests={event.food}/> */}
     </div>
   )
 }

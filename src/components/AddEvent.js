@@ -18,8 +18,8 @@ function AddEvent(props){
     day: 1,
     month: 'January',
     year: 2021,
-    start_time: 0,
-    end_time: 0,
+    start_time: 1,
+    end_time: 2,
     location: ''
   });
 
@@ -39,8 +39,9 @@ function AddEvent(props){
       start_time: Number(formVal.start_time),
       end_time: Number(formVal.end_time)
     };
+    console.log(typeCorrected);
     api.post('/events', typeCorrected)
-      .then(res => {
+       .then(res => {
 	props.addEvent(res.data.event);
 	push('/organizer');
       })
