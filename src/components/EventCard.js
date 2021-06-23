@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import { deleteEvent } from '../actions/eventActions';
 
+import AddFoodForm from './AddFoodForm';
+
 import axios from 'axios';
 const api = axios.create({
   baseURL: 'https://potluck-planner1.herokuapp.com/api',
@@ -14,7 +16,9 @@ const api = axios.create({
 
 function EventCard(props){
   const [deleteOpen, setDeleteOpen] = useState(false);
+
   const { event } = props;
+
 
   const onDeleteOpen = () => {
     setDeleteOpen(true);
@@ -46,9 +50,10 @@ function EventCard(props){
       <div className='food-list'>
 	<h5>Food Requests</h5>
 	<ul>
-	  { event.food.map(item => <li>{item.name}</li>)}
+	  { event.food.map(item => <li key={item.id}>{item.name}</li>)}
 	</ul>
       </div>
+      <AddFoodForm/>
       { deleteOpen ? (
 	<div className='delete-modal'>
 	  Are you Sure?
