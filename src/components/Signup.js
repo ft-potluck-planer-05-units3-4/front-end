@@ -1,40 +1,59 @@
-// function LoginSignup(){
-//     return "Please Replace Me";
-// }
-
-// export default LoginSignup;
 import React, {useState} from 'react';
-const Signup = () => {
+import  '../Styles/signup.css'
+import { connect } from 'react-redux';
+import { loginUser } from '../actions/userActions';
+import { useHistory } from 'react-router';
+
+const Form = (props) => {
   const [formData, setFormData] = useState ({
-    userName: '',
+    firstName: '',
+    lastName: '',
+    email: '',
     password: '',
   });
+  const { push } = useHistory();
+  const { isLoggedIn } = props;
+
   const updateFormData = event =>
     setFormData ({
       ...formData,
       [event.target.name]: event.target.value,
     });
-  const {userName, password} = formData;
+  const {firstName, lastName, email, password} = formData;
 
-  const onSubmit = evt => {
-    evt.preventDefault ();
-    // console.log("FormData:",formData);
-//     const loginCreds = {
-//       username: formData.username.trim (),
-//       password: formData.password.trim (),
-//     };
-    // console.log("LoginCreds:",loginCreds);
-    // props.loginUser (loginCreds);
+  const onSubmit = (evt) => {
+    evt.preventDefault();
+    const loginCreds = {
+      username: formData.username.trim(),
+      password: formData.password.trim(),
+    };
+    props.loginUser(loginCreds);
   };
 
   return (
     <form>
       <input
-        value={userName}
+        value={firstName}
         onChange={e => updateFormData (e)}
-        placeholder="User Name"
+        placeholder="First name"
         type="text"
-        name="userName"
+        name="firstName"
+        required
+      />
+      <input
+        value={lastName}
+        onChange={e => updateFormData (e)}
+        placeholder="Last name"
+        type="text"
+        name="lastName"
+        required
+      />
+      <input
+        value={email}
+        onChange={e => updateFormData (e)}
+        placeholder="Email address"
+        type="email"
+        name="email"
         required
       />
       <input
@@ -45,8 +64,16 @@ const Signup = () => {
         name="password"
         required
       />
-      <button onClick={onSubmit} type="submit">Submit</button>
+      <button type="submit">Submit</button>
     </form>
   );
 };
-export default Signup;
+// const mapStateToProps = (state) => {
+//   return {
+//     username: state.userReducer.username,
+//     password: state.userReducer.password,
+//     isLoggedIn: state.userReducer.isLoggedIn,
+//   };
+// };
+// export default connect(mapStateToProps, { loginUser })(Form);
+export default (Form);
