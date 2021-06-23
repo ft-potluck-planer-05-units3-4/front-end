@@ -53,22 +53,25 @@ function Inviting(props) {
 	  users
 	    .filter(user => user.invited)
 	    .map(user => user.id));
+	const apiCalls = [];
 	resX.data.forEach(user => {
 	  if (!invitedUsers.has(user.id)){
-	    console.log(user.id, " not found");
-	    // delete user from guest list
+	    alert('finish delete implementation to delete');
+	    // apiCalls.push(api.delete(`/events/${id}/guests`, {
+	    //   userID: user.id
+	    // }));
 	  }
 	  invitedUsers.delete(user.id);
 	});
 	invitedUsers.forEach(userID => {
-	  api.post(`/events/${id}/guests`, {
+	  apiCalls.push(api.post(`/events/${id}/guests`, {
 	    userID: userID
-	  })
-	    .then(resY => {
-	      console.log(props.editEvent);
-	    })
-	    .catch(alert);
+	  }));
 	});
+	apiCalls.forEach(call => {
+	  call.catch(alert);
+	});
+	console.log(apiCalls);
       })
       .catch(alert);
     console.log(users);
