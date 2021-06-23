@@ -35,28 +35,35 @@ function AddFoodForm({onAddFood}) {
   return (Open ? (
     <div className='add-food-modal'>
       <form onSubmit={onSubmit}>
-	<input
-	  name='name'
-	  value={formVal.name}
-	  onChange={onChange}
-	  type='text'
-	  placeholder='Food Name'
-	/>
-	<input
-	  name='quantity'
-	  value={formVal.quantity}
-	  onChange={onChange}
-	  type='number'
-	  min='0'
-	  step='any'
-	/>
-	<input
-	  name='category'
-	  value={formVal.category}
-	  onChange={onChange}
-	  type='text'
-	  placeholder='Food Category'
-	/>
+	<label>
+	  Name
+	  <input
+	    name='name'
+	    value={formVal.name}
+	    onChange={onChange}
+	    type='text'
+	  />
+	</label>
+	<label>
+	  Quantity
+	  <input
+	    name='quantity'
+	    value={formVal.quantity}
+	    onChange={onChange}
+	    type='number'
+	    min='0'
+	    step='any'
+	  />
+	</label>
+	<label>
+	  Category
+	  <input
+	    name='category'
+	    value={formVal.category}
+	    onChange={onChange}
+	    type='text'
+	  />
+	</label>
 	<button>Add Food</button>
       </form>
       <button onClick={onClose}>Cancel</button>
