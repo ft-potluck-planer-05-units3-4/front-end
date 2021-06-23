@@ -13,7 +13,10 @@ function eventReducer(state = initialState, action) {
   case EDIT_EVENT:
     const returnEvents = state.events.map(event => {
       if (event.id === action.payload.id){
-	return action.payload;
+	return {
+	  ...event,
+	  ...action.payload
+	};
       } else {
 	return event;
       }

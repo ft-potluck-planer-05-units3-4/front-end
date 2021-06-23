@@ -38,6 +38,12 @@ function EventCard(props){
 
   const onAddFood = (newFood) => {
     console.log(newFood);
+    api.post('/food', {
+      ...newFood,
+      eventID: event.id
+    })
+      .then(console.log)
+      .catch(alert);
     alert('Please replace me with an action');
   };
   
@@ -56,7 +62,7 @@ function EventCard(props){
       <div className='food-list'>
 	<h5>Food Requests</h5>
 	<ul>
-	  { event.food.map(item => <li key={item.id}>{item.name}</li>)}
+	  { event.food.map(item => <li key={item.id}>{item.name}, {item.quantity}</li>)}
 	</ul>
       </div>
       <AddFoodForm onAddFood={onAddFood}/>
