@@ -35,6 +35,12 @@ function EventCard(props){
       })
       .catch(alert);
   };
+
+  const onAddFood = (newFood) => {
+    console.log(newFood);
+    alert('Please replace me with an action');
+  };
+  
   return (
     <div className='event-card'>
       <h3>{event.title}</h3>
@@ -53,7 +59,7 @@ function EventCard(props){
 	  { event.food.map(item => <li key={item.id}>{item.name}</li>)}
 	</ul>
       </div>
-      <AddFoodForm/>
+      <AddFoodForm onAddFood={onAddFood}/>
       { deleteOpen ? (
 	<div className='delete-modal'>
 	  Are you Sure?
