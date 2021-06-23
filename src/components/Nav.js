@@ -24,7 +24,8 @@ function Nav(props) {
 	const returnEvents = res.data.map(event => {
 	  return {
 	    ...event,
-	    food: api.get(`/events/${event.id}/food`)
+	    food: api.get(`/events/${event.id}/food`),
+	    guests: api.get(`/events/${event.id}/guests`)
 	  };
 	});
 	returnEvents.forEach(event => {
@@ -33,8 +34,18 @@ function Nav(props) {
 	      event.food = res.data;
 	    })
 	    .catch(alert);
+	  event.guests
+	    .then(res => {
+	      event.guests = res.data;
+	    })
+	    .catch(alert);
 	});
-	Promise.all(returnEvents.map(event => event.food))
+	const allApiCalls = returnEvents
+	      .map(event => event.food)
+	      .concat(returnEvents
+		      .map(event => event.guests));
+	
+	Promise.all(allApiCalls)
 	  .then(vals => {
 	    dispatch(setEvents(returnEvents));
 	  })
