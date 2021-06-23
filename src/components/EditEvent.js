@@ -48,7 +48,7 @@ function EditEvent(props){
       start_time: Number(formVal.start_time),
       end_time: Number(formVal.end_time)
     };
-    api.put(`/events/${id}`, typeCorrected)
+      api.put(`/events/${id}`, typeCorrected)
       .then(res => {
 	props.editEvent(res.data.success);
 	push('/organizer');

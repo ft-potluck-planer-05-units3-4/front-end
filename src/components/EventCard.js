@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { deleteEvent } from '../actions/eventActions';
+import { deleteEvent, editEvent } from '../actions/eventActions';
+
+import AddFoodForm from './AddFoodForm';
 
 import axios from 'axios';
 const api = axios.create({
@@ -14,7 +16,9 @@ const api = axios.create({
 
 function EventCard(props){
   const [deleteOpen, setDeleteOpen] = useState(false);
+
   const { event } = props;
+
 
   const onDeleteOpen = () => {
     setDeleteOpen(true);
@@ -31,6 +35,37 @@ function EventCard(props){
       })
       .catch(alert);
   };
+
+  const onAddFood = (newFood) => {
+    console.log(newFood);
+    api.post('/food', {
+      ...newFood,
+      eventID: event.id
+    })
+      .then(res => {
+	props.editEvent({
+	  ...event,
+	  food: [...event.food, res.data.food]
+	});	
+      })
+      .catch(alert);
+  };
+
+  const onDelFoodMaker = (id) => {
+    const onDelFood = () => {
+      api.delete(`/food/${id}`)
+	.then(res => {
+	  const newFood = event.food.filter(item => item.id !== id);
+	  props.editEvent({
+	    ...event,
+	    food: newFood
+	  });
+	})
+	.catch(alert);
+    };
+    return onDelFood;
+  };
+
   return (
     <div className='event-card'>
       <h3>{event.title}</h3>
@@ -42,14 +77,21 @@ function EventCard(props){
 	  Who's Invited
 	</li>
 	{ event.invited.map(invitee => <li>{invitee.name}</li>)}
-      </ul>
-      <ul>
-	<li>
-	  Food Requests
-	</li>
-	{ event.food.map(item => <li>{item.name}</li>)}
-      </ul>
-       */}
+	</ul> */}
+      <div className='food-list'>
+	<h5>Food Requests</h5>
+	<ul>
+	  { event.food.map(item => {
+	    return (
+	      <li key={item.id}>
+		{item.name}, {item.quantity}
+		<button onClick={onDelFoodMaker(item.id)}>&times;</button>
+	      </li>
+	    );
+	  })}
+	</ul>
+      </div>
+      <AddFoodForm onAddFood={onAddFood}/>
       { deleteOpen ? (
 	<div className='delete-modal'>
 	  Are you Sure?
@@ -75,4 +117,4 @@ function EventCard(props){
   );
 }
 
-export default connect(null, { deleteEvent })(EventCard);
+export default connect(null, { deleteEvent, editEvent })(EventCard);
