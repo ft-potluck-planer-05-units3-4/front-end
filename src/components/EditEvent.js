@@ -11,10 +11,6 @@ const api = axios.create({
   }
 });
 
-api.get('/events')
-  .then(console.log)
-  .catch(alert);
-
 function EditEvent(props){
   const { push } = useHistory();
   const { id } = useParams();

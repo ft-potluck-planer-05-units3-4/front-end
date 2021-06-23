@@ -10,7 +10,7 @@ function eventReducer(state = initialState, action) {
   case DELETE_EVENT:
     return ({
       ...state,
-      events: state.events.filter(event => event.id === action.payload)
+      events: state.events.filter(event => event.id !== action.payload)
     });
   case LOAD_DATA:
     return ({
