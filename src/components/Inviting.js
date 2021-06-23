@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
+import { editEvent } from '../actions/eventActions';
 
 import axios from 'axios';
 const api = axios.create({
@@ -10,24 +11,29 @@ const api = axios.create({
   }
 });
 
-function Inviting() {
+function Inviting(props) {
   const { push } = useHistory();
   const { id } = useParams();
+
   const [users, setUsers] = useState([]);
   useEffect(() => {
-    const apiCalls = [api.get('/users'), api.get(`/events/${id}/guests`)];
-    Promise.all(apiCalls)
-      .then(([userRes, guestRes]) => {
-	const guestSet = new Set(guestRes.data.map(guest => guest.id));
-	const returnUsers = userRes.data;
-	returnUsers.forEach(user => {
-	  user.invited = guestSet.has(user.id);
-	});
-	setUsers(returnUsers);
-      })
-      .catch(alert);
-  }, [id]);
-
+    if (props.events.length) {
+      const guestSet = new Set(props.events
+			       .find(event => event.id === Number(id))
+			       .guests
+			       .map(guest => guest.id));
+      api.get('/users')
+	.then(res => {
+	  setUsers(res.data.map(user => {
+	    return {
+	      ...user,
+	      invited: guestSet.has(user.id)
+	    };
+	  }));
+	})
+	.catch(alert);
+    }
+  }, [id, props.events]);
   const onChange = (e) => {
     const changedUser = users.find(user => user.id === Number(e.target.name));
     const returnUsers = users.map(user => {
@@ -41,6 +47,30 @@ function Inviting() {
   
   const onSubmit = (e) => {
     e.preventDefault();
+    api.get(`/events/${id}/guests`)
+      .then(resX => {
+	const invitedUsers = new Set(
+	  users
+	    .filter(user => user.invited)
+	    .map(user => user.id));
+	resX.data.forEach(user => {
+	  if (!invitedUsers.has(user.id)){
+	    console.log(user.id, " not found");
+	    // delete user from guest list
+	  }
+	  invitedUsers.delete(user.id);
+	});
+	invitedUsers.forEach(userID => {
+	  api.post(`/events/${id}/guests`, {
+	    userID: userID
+	  })
+	    .then(resY => {
+	      console.log(props.editEvent);
+	    })
+	    .catch(alert);
+	});
+      })
+      .catch(alert);
     console.log(users);
     push('/organizer');
   };
@@ -65,4 +95,9 @@ function Inviting() {
   );
 }
 
-export default Inviting;
+const state2props = (state) => {
+  return {
+    events: state.events.events
+  };
+};
+export default connect(state2props, { editEvent })(Inviting);
