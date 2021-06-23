@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { Switch, Route, Link, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
+import { setEvents } from '../actions/eventActions';
 
 import EventsList from './EventsList';
 import InvitedList from './InvitedList';
 import AttendingList from './AttendingList';
 
-import { setEvents } from '../actions/eventActions';
 import axios from 'axios';
 const api = axios.create({
   baseURL: 'https://potluck-planner1.herokuapp.com/api',
@@ -15,14 +16,16 @@ const api = axios.create({
   }
 });
 
-function Nav() {
-  useEffect(() => {
+function Nav(props) {
+  const dispatch = useDispatch();
+  useEffect(()=> {
     api.get('/events')
       .then(res => {
-	setEvents(res.data);
+	dispatch(setEvents(res.data));
       })
       .catch(alert);
-  }, []);
+  }, [dispatch]);
+
   return (
     <>
       <header>
@@ -60,4 +63,4 @@ function Nav() {
   )
 };
 
-export default connect(null, { setEvents })(Nav);
+export default Nav;

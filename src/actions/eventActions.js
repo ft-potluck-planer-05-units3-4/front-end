@@ -17,9 +17,10 @@ const addEvent = (event) => {
   };
 };
 
-const deleteEvent = (event) => {
+const deleteEvent = (id) => {
   return {
-    type: DELETE_EVENT
+    type: DELETE_EVENT,
+    payload: id
   };
 };
 

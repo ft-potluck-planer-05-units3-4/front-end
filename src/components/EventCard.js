@@ -36,6 +36,9 @@ function EventCard(props){
       <Link to={`/invite-to/${event.id}`}>
 	Invite More
       </Link>
+      <Link to={`/edit-event/${event.id}`}>
+	Edit
+      </Link>
     </div>
   );
 }
