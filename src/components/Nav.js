@@ -21,7 +21,24 @@ function Nav(props) {
   useEffect(()=> {
     api.get('/events')
       .then(res => {
-	dispatch(setEvents(res.data));
+	const returnEvents = res.data.map(event => {
+	  return {
+	    ...event,
+	    food: api.get(`/events/${event.id}/food`)
+	  };
+	});
+	returnEvents.forEach(event => {
+	  event.food
+	    .then(res => {
+	      event.food = res.data;
+	    })
+	    .catch(alert);
+	});
+	Promise.all(returnEvents.map(event => event.food))
+	  .then(vals => {
+	    dispatch(setEvents(returnEvents));
+	  })
+	  .catch(alert);
       })
       .catch(alert);
   }, [dispatch]);

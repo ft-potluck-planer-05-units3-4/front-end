@@ -42,14 +42,13 @@ function EventCard(props){
 	  Who's Invited
 	</li>
 	{ event.invited.map(invitee => <li>{invitee.name}</li>)}
-      </ul>
-      <ul>
-	<li>
-	  Food Requests
-	</li>
-	{ event.food.map(item => <li>{item.name}</li>)}
-      </ul>
-       */}
+	</ul> */}
+      <div className='food-list'>
+	<h5>Food Requests</h5>
+	<ul>
+	  { event.food.map(item => <li>{item.name}</li>)}
+	</ul>
+      </div>
       { deleteOpen ? (
 	<div className='delete-modal'>
 	  Are you Sure?
