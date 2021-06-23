@@ -23,7 +23,7 @@ function App() {
 	    <Route path='/add-event' component={AddEvent}/>
 	    <Route path='/invite-to/:id' component={Inviting}/>
 	    <Route path='/edit-event/:id' component={EditEvent}/>
-//             <Route path='Login-Signup' component={Login-Signup}/>    
+            <Route path='Login' component={Login}/>    
             <Route path='/' component={Nav}/>    
      	  </Switch>
 	</div>
