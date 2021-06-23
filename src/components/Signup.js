@@ -1,3 +1,8 @@
+// function LoginSignup(){
+//     return "Please Replace Me";
+// }
+
+// export default LoginSignup;
 import React, {useState} from 'react';
 const Signup = () => {
   const [formData, setFormData] = useState ({
@@ -14,10 +19,10 @@ const Signup = () => {
   const onSubmit = evt => {
     evt.preventDefault ();
     // console.log("FormData:",formData);
-    const loginCreds = {
-      username: formData.username.trim (),
-      password: formData.password.trim (),
-    };
+//     const loginCreds = {
+//       username: formData.username.trim (),
+//       password: formData.password.trim (),
+//     };
     // console.log("LoginCreds:",loginCreds);
     // props.loginUser (loginCreds);
   };
