@@ -39,7 +39,6 @@ function AddEvent(props){
       start_time: Number(formVal.start_time),
       end_time: Number(formVal.end_time)
     };
-    console.log(typeCorrected);
     api.post('/events', typeCorrected)
        .then(res => {
 	props.addEvent(res.data.event);
