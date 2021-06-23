@@ -78,19 +78,21 @@ function EventCard(props){
 	</li>
 	{ event.invited.map(invitee => <li>{invitee.name}</li>)}
 	</ul> */}
-      <div className='food-list'>
-	<h5>Food Requests</h5>
-	<ul>
-	  { event.food.map(item => {
-	    return (
-	      <li key={item.id}>
-		{item.name}, {item.quantity}
-		<button onClick={onDelFoodMaker(item.id)}>&times;</button>
-	      </li>
-	    );
-	  })}
-	</ul>
-      </div>
+      { event.food && (
+	<div className='food-list'>
+	  <h5>Food Requests</h5>
+	  <ul>
+	    { event.food.map(item => {
+	      return (
+		<li key={item.id}>
+		  {item.name}, {item.quantity}
+		  <button onClick={onDelFoodMaker(item.id)}>&times;</button>
+		</li>
+	      );
+	    })}
+	  </ul>
+	</div>
+      )}
       <AddFoodForm onAddFood={onAddFood}/>
       { deleteOpen ? (
 	<div className='delete-modal'>
