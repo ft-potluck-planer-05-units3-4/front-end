@@ -37,7 +37,6 @@ function EventCard(props){
   };
 
   const onAddFood = (newFood) => {
-    console.log(newFood);
     api.post('/food', {
       ...newFood,
       eventID: event.id
@@ -66,7 +65,6 @@ function EventCard(props){
     return onDelFood;
   };
 
-  console.log(event.guests);
   return (
     <div className='event-card'>
       <h3>{event.title}</h3>

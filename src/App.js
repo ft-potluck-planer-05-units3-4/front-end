@@ -7,7 +7,6 @@ import { createStore } from 'redux';
 import rootReducer from './reducers';
 
 // import PrivateRoute from './utils/privateRoute';
-import Inviting from './components/Inviting';
 import Nav from './components/Nav';
 import AddEvent from './components/AddEvent';
 import EditEvent from './components/EditEvent';
@@ -16,12 +15,12 @@ const store = createStore(rootReducer);
 
 function App() {
   return (
+
     <Provider store={store}>
       <Router>
 	<div className="App">
      	  <Switch>
 	    <Route path='/add-event' component={AddEvent}/>
-	    <Route path='/invite-to/:id' component={Inviting}/>
 	    <Route path='/edit-event/:id' component={EditEvent}/>
             <Route path='Signup' component={Signup}/>    
             <Route path='/' component={Nav}/>    

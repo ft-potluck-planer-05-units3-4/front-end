@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import { setEvents } from '../actions/eventActions';
 
+import Inviting from './Inviting';
 import EventsList from './EventsList';
 import InvitedList from './InvitedList';
 import AttendingList from './AttendingList';
@@ -75,6 +76,7 @@ function Nav(props) {
       </header>
       <main>
 	<Switch>
+	  <Route path='/invite-to/:id' component={Inviting}/>
 	  <Route path='/attendee'>
 	    <InvitedList/>
 	    <AttendingList/>
