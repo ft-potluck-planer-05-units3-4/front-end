@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { connect } from 'react-redux';
-import { editEvent } from 'react-redux';
+import { editEvent } from '../actions/eventActions';
 
 import axios from 'axios';
 const api = axios.create({
@@ -47,6 +47,30 @@ function Inviting(props) {
   
   const onSubmit = (e) => {
     e.preventDefault();
+    api.get(`/events/${id}/guests`)
+      .then(resX => {
+	const invitedUsers = new Set(
+	  users
+	    .filter(user => user.invited)
+	    .map(user => user.id));
+	resX.data.forEach(user => {
+	  if (!invitedUsers.has(user.id)){
+	    console.log(user.id, " not found");
+	    // delete user from guest list
+	  }
+	  invitedUsers.delete(user.id);
+	});
+	invitedUsers.forEach(userID => {
+	  api.post(`/events/${id}/guests`, {
+	    userID: userID
+	  })
+	    .then(resY => {
+	      console.log(props.editEvent);
+	    })
+	    .catch(alert);
+	});
+      })
+      .catch(alert);
     console.log(users);
     push('/organizer');
   };
@@ -76,4 +100,4 @@ const state2props = (state) => {
     events: state.events.events
   };
 };
-export default connect(state2props)(Inviting);
+export default connect(state2props, { editEvent })(Inviting);
