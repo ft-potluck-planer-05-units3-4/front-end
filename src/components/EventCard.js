@@ -1,11 +1,16 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { deleteEvent } from '../actions/eventActions';
 
 function EventCard(props){
   const { event } = props;
+
+  const onDelete = () => {
+    props.deleteEvent(event.id);
+  };
+  
   return (
     <div className='event-card'>
       <h3>{event.title}</h3>
@@ -24,13 +29,13 @@ function EventCard(props){
 	</li>
 	{ event.food.map(item => <li>{item.name}</li>)}
       </ul>
-      <button onClick={props.deleteEvent(event.id)}>
+       */}
+      <button onClick={onDelete}>
 	Delete Event
-      </button>
+	</button>
       <Link to={`/invite-to/${event.id}`}>
 	Invite More
       </Link>
-       */}
     </div>
   );
 }

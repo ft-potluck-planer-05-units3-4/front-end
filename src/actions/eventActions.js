@@ -1,6 +1,7 @@
 export const ADD_EVENT = 'ADD_EVENT';
 export const LOAD_DATA = 'LOAD_DATA';
 export const SET_EVENTS = 'SET_EVENTS';
+export const DELETE_EVENT = 'DELETE_EVENT';
 
 const setEvents = (events) => {
   return {
@@ -17,6 +18,9 @@ const addEvent = (event) => {
 };
 
 const deleteEvent = (event) => {
+  return {
+    type: DELETE_EVENT
+  };
 };
 
 const editEvent = (event) => {
