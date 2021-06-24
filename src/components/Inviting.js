@@ -5,7 +5,7 @@ import { editEvent } from '../actions/eventActions';
 
 import axios from 'axios';
 const api = axios.create({
-    baseURL: 'https://potluck-planner1.herokuapp.com/api',
+  baseURL: 'https://potluck-planner1.herokuapp.com/api',
   headers: {
     Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0Ijo2LCJuYW1lIjoidGVzdGVyIiwidXNlcm5hbWUiOiJ0ZXN0ZXIiLCJpYXQiOjE2MjQzNjUwNTQsImV4cCI6MTYyNDk2OTg1NH0.pdyE9DfHyUiz1N8hZQI7veq1c-hRad1hg4kcSFVKg6c'
   }
@@ -53,25 +53,34 @@ function Inviting(props) {
 	  users
 	    .filter(user => user.invited)
 	    .map(user => user.id));
+	const apiCalls = [];
 	resX.data.forEach(user => {
 	  if (!invitedUsers.has(user.id)){
-	    console.log(user.id, " not found");
-	    // delete user from guest list
+	    apiCalls.push(api.delete(`/events/${id}/guests/${user.userID}`))
 	  }
 	  invitedUsers.delete(user.id);
 	});
 	invitedUsers.forEach(userID => {
-	  api.post(`/events/${id}/guests`, {
+	  apiCalls.push(api.post(`/events/${id}/guests`, {
 	    userID: userID
-	  })
-	    .then(resY => {
-	      console.log(props.editEvent);
-	    })
-	    .catch(alert);
+	  }));
 	});
+	apiCalls.forEach(call => {
+	  call.catch(err => {
+	    console.log(err.message);
+	    alert(err)
+	  });
+	});
+	Promise.all(apiCalls)
+	  .then(vals => {
+	    props.editEvent({
+	      ...props.events.find(event => event.id === Number(id)),
+	      guests: users.filter(user => user.invited)
+	    });
+	  })
+	  .catch(alert);
       })
       .catch(alert);
-    console.log(users);
     push('/organizer');
   };
   

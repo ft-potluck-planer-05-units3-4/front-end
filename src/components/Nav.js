@@ -7,7 +7,6 @@ import { setEvents } from '../actions/eventActions';
 import Inviting from './Inviting';
 import EventsList from './EventsList';
 import InvitedList from './InvitedList';
-import AttendingList from './AttendingList';
 
 import axios from 'axios';
 const api = axios.create({
@@ -79,7 +78,6 @@ function Nav(props) {
 	  <Route path='/invite-to/:id' component={Inviting}/>
 	  <Route path='/attendee'>
 	    <InvitedList/>
-	    <AttendingList/>
 	  </Route>
 	  <Route path='/organizer'>
 	    <EventsList/>

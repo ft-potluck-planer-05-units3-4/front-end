@@ -10,12 +10,24 @@ const api = axios.create({
   }
 });
 
+const currentUserID = 2;  // change to user's id
+
 function InvitedList(props){
   const [invites, setInvites] = useState([]);
   useEffect(() => {
-    api.get('/events/users/1') // would like to be able to use id here
+    api.get('/events/')
       .then(res => {
-	setInvites(res.data.guestEvents); // once the api works, this will work straight up.
+	const guestListCalls = res.data.map(event => {
+	  return api.get(`/events/${event.id}/guests`);
+	});
+	Promise.all(guestListCalls)
+	  .then(vals => {
+	    const eventIDs = new Set(vals.map(val => {
+	      const invite = val.data.find(user => user.id === currentUserID);
+	      return invite && invite.eventsID
+	    }).filter(val => val));
+	    setInvites(res.data.filter(event => eventIDs.has(event.id)));
+	  })
       })
       .catch(alert);
   },[]);
