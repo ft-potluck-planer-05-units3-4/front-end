@@ -14,53 +14,53 @@ import {
   GET_EVENT_BY_ID_LOADING,
   GET_EVENT_BY_ID_SUCCESS,
   GET_EVENT_BY_ID_FAILURE,
-} from '../actions/eventActions';
+} from "../actions/eventActions";
 
 const initialState = {
-  error: '',
+  error: "",
   isLoading: false,
   allOrganizerEvents: [],
   singleEvent: {},
 };
-export const eventReducer = ( state = initialState, action ) => {
-  switch ( action.type ) {
+export const eventReducer = (state = initialState, action) => {
+  switch (action.type) {
     case GET_EVENTS_LOADING:
       return {
         ...state,
         isLoading: true,
-          error: '',
+        error: "",
       };
     case GET_EVENTS_SUCCESS:
       return {
         ...state,
         isLoading: false,
-          error: '',
-          allOrganizerEvents: action.payload,
+        error: "",
+        allOrganizerEvents: action.payload,
       };
     case GET_EVENTS_FAILURE:
       return {
         ...state,
         isLoading: false,
-          error: action.payload,
+        error: action.payload,
       };
     case ADD_EVENT_LOADING:
       return {
         ...state,
         isLoading: true,
-          error: '',
+        error: "",
       };
     case ADD_EVENT_SUCCESS:
       return {
         ...state,
         isLoading: false,
-          error: '',
-          allOrganizerEvents: [ ...state.allEvents, action.payload ],
+        error: "",
+        allOrganizerEvents: [...state.allEvents, action.payload],
       };
     case ADD_EVENT_FAILURE:
       return {
         ...state,
         isLoading: false,
-          error: action.payload,
+        error: action.payload,
       };
     case DELETE_EVENT_LOADING:
       return {
@@ -68,37 +68,37 @@ export const eventReducer = ( state = initialState, action ) => {
         isLoading: true,
       };
     case DELETE_EVENT_SUCCESS:
-      console.log( "Delete event:", state, action.payload )
+      console.log("Delete event:", state, action.payload);
       return {
         ...state,
         // isLoading: false,
-        allOrganizerEvents: state.allOrganizerEvents.filter( ( event ) => {
+        allOrganizerEvents: state.allOrganizerEvents.filter((event) => {
           return event.event_id !== action.payload.event_id;
-        } ),
+        }),
       };
     case DELETE_EVENT_FAILURE:
       return {
         ...state,
         isLoading: false,
-          error: action.payload,
+        error: action.payload,
       };
     case EDIT_EVENT_LOADING:
       return {
         ...state,
         isLoading: true,
-          error: '',
+        error: "",
       };
     case EDIT_EVENT_SUCCESS:
       return {
         ...state,
         isLoading: false,
-          error: '',
+        error: "",
       };
     case EDIT_EVENT_FAILURE:
       return {
         ...state,
         isLoading: false,
-          error: action.payload,
+        error: action.payload,
       };
     case GET_EVENT_BY_ID_LOADING:
       return {
@@ -109,13 +109,13 @@ export const eventReducer = ( state = initialState, action ) => {
       return {
         ...state,
         singleEvent: action.payload,
-          isLoading: false,
+        isLoading: false,
       };
     case GET_EVENT_BY_ID_FAILURE:
       return {
         ...state,
         error: action.payload,
-          isLoading: false,
+        isLoading: false,
       };
     default:
       return state;

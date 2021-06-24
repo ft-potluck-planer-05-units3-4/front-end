@@ -1,17 +1,6 @@
 # Front End:
 
-
 ## Quick-links:
-
-
-
-
-
-
-
-
-
-
 
 # Potluck Planner
 
@@ -41,14 +30,10 @@ In the world of social gatherings and potlucks the "Potluck Planner" is king. Th
 
 2. Ability to upload multiple `photos` from the potluck gathering, like a photo gallery for a past event.
 
-
-
-
 ![](component-hierarchy.png)
 
-
-
 ---
+
 ---
 
 # Backend:
@@ -96,11 +81,11 @@ Headers:
 
 ## Food
 
-| Method | Endpoint             | Requirements                                                          |                                  |
-| ------ | -------------------- | --------------------------------------------------------------------- | -------------------------------- |
-| GET    | /api/food            |                                                                       | Returns all food items           |
-| GET    | /api/events/:id/food |                                                                       | Returns all the food by event id |
-| GET    | /api/food/:id        |                                                                       | Returns food object by id        |
+| Method | Endpoint             | Requirements                                                                              |                                  |
+| ------ | -------------------- | ----------------------------------------------------------------------------------------- | -------------------------------- |
+| GET    | /api/food            |                                                                                           | Returns all food items           |
+| GET    | /api/events/:id/food |                                                                                           | Returns all the food by event id |
+| GET    | /api/food/:id        |                                                                                           | Returns food object by id        |
 | POST   | /api/food            | eventId, userID(of person bringing, optional), category, quantity, name (must be unique)  | Creates new food object          |
 | PUT    | /api/food/:id        | eventId, userID(of person bringing, optional), category, quantity , name (must be unique) | Updates the food by id           |
-| DELETE | /api/food/:id        |                                                                       | Deletes the food by id"          |
+| DELETE | /api/food/:id        |                                                                                           | Deletes the food by id"          |

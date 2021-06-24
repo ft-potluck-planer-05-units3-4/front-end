@@ -5,19 +5,18 @@ import {
   LOGIN_LOADING,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-}
-from '../actions/userActions';
+} from "../actions/userActions";
 const initialState = {
-  username: '',
-  error: '',
+  username: "",
+  error: "",
   isLoading: false,
-  user_id: '',
-  token: window.localStorage.getItem( 'token' ) || '',
-  message: '',
+  user_id: "",
+  token: window.localStorage.getItem("token") || "",
+  message: "",
   isLoggedIn: false,
 };
-export const userReducer = ( state = initialState, action ) => {
-  switch ( action.type ) {
+export const userReducer = (state = initialState, action) => {
+  switch (action.type) {
     case REGISTER_LOADING:
       return {
         ...state,
@@ -27,36 +26,36 @@ export const userReducer = ( state = initialState, action ) => {
       return {
         ...state,
         username: action.payload.username,
-          user_id: action.payload.user_id,
-          isLoading: false,
+        user_id: action.payload.user_id,
+        isLoading: false,
       };
     case REGISTER_FAILURE:
       return {
         ...state,
         isLoading: false,
-          error: action.payload,
+        error: action.payload,
       };
     case LOGIN_LOADING:
       return {
         ...state,
         isLoading: true,
-          error: '',
+        error: "",
       };
     case LOGIN_SUCCESS:
       return {
         ...state,
         isLoading: false,
-          // username: action.payload.username,
-          user_id: action.payload.user_id,
-          token: action.payload.token,
-          message: action.payload.message,
-          isLoggedIn: true,
+        // username: action.payload.username,
+        user_id: action.payload.user_id,
+        token: action.payload.token,
+        message: action.payload.message,
+        isLoggedIn: true,
       };
     case LOGIN_FAILURE:
       return {
         ...state,
         isLoading: false,
-          error: action.payload,
+        error: action.payload,
       };
     default:
       return state;
