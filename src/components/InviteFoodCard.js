@@ -43,7 +43,6 @@ function InviteFoodCard({item, invite}) {
       .catch(alert);
   };
 
-  console.log(invite);
   return (
     <li>
       <h5>{item.name}</h5>
