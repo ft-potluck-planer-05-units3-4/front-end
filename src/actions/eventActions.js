@@ -3,12 +3,20 @@ export const LOAD_DATA = 'LOAD_DATA';
 export const SET_EVENTS = 'SET_EVENTS';
 export const DELETE_EVENT = 'DELETE_EVENT';
 export const EDIT_EVENT = 'EDIT_EVENT';
+export const SET_INVITES = 'SET_INVITES'
 
 const setEvents = (events) => {
   return {
     type: SET_EVENTS,
     payload: events
   };
+};
+
+const setInvites = (invites) => {
+  return {
+    type: SET_INVITES,
+    payload: invites
+  }
 };
 
 const addEvent = (event) => {
@@ -32,4 +40,4 @@ const editEvent = (event) => {
     };
 };
 
-export { setEvents, addEvent, deleteEvent, editEvent };
+export { setInvites, setEvents, addEvent, deleteEvent, editEvent };
