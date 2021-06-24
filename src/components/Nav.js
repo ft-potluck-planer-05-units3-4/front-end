@@ -79,7 +79,6 @@ function Nav(props) {
 	  <Route path='/invite-to/:id' component={Inviting}/>
 	  <Route path='/attendee'>
 	    <InvitedList/>
-	    <AttendingList/>
 	  </Route>
 	  <Route path='/organizer'>
 	    <EventsList/>
