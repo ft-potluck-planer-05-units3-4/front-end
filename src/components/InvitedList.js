@@ -45,7 +45,6 @@ function InvitedList(props){
       })
       .catch(alert);
   },[setInvites]);
-  console.log(invites);
   return (
     <div className='invites'>
       {invites.map(invite => <InviteCard key={invite.id} invite={invite}/>)}
