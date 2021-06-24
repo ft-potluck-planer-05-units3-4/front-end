@@ -1,5 +1,5 @@
 import {
-  DELETE_INVITE, EDIT_INVITE, SET_INVITES, EDIT_EVENT, ADD_EVENT, LOAD_DATA, SET_EVENTS, DELETE_EVENT
+  DELETE_INVITE, EDIT_INVITE, SET_INVITES, EDIT_EVENT, ADD_EVENT, SET_EVENTS, DELETE_EVENT
 } from '../actions/eventActions';
 
 const initialState = {
@@ -53,11 +53,6 @@ function eventReducer(state = initialState, action) {
     return ({
       ...state,
       events: state.events.filter(event => event.id !== action.payload)
-    });
-  case LOAD_DATA:
-    return ({
-      ...state,
-      ...action.payload
     });
   case ADD_EVENT:
     return ({

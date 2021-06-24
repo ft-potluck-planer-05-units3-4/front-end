@@ -1,4 +1,4 @@
-// import React from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import InviteFoodCard from './InviteFoodCard';
@@ -34,7 +34,7 @@ function InviteCard({invite}) {
         <>
           <h5>Food Requests: </h5>
           <ul>
-            {invite.food.map(food => <InviteFoodCard key={food.id} food={food}/>)}
+            {invite.food.map(item => <InviteFoodCard key={item.id} item={item} invite={invite}/>)}
           </ul>
         </>
       )}
