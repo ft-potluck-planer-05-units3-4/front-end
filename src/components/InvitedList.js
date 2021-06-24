@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import InviteCard from './InviteCard';
+import { setInvites } from '../actions/eventActions';
 
 import axios from 'axios';
 const api = axios.create({
@@ -13,24 +14,37 @@ const api = axios.create({
 const currentUserID = 2;  // change to user's id
 
 function InvitedList(props){
-  const [invites, setInvites] = useState([]);
+  const { invites, setInvites } = props;
   useEffect(() => {
     api.get('/events/')
       .then(res => {
-	const guestListCalls = res.data.map(event => {
-	  return api.get(`/events/${event.id}/guests`);
-	});
-	Promise.all(guestListCalls)
-	  .then(vals => {
-	    const eventIDs = new Set(vals.map(val => {
-	      const invite = val.data.find(user => user.id === currentUserID);
-	      return invite && invite.eventsID
-	    }).filter(val => val));
-	    setInvites(res.data.filter(event => eventIDs.has(event.id)));
-	  })
+        const guestListCalls = res.data.map(event => {
+          return api.get(`/events/${event.id}/guests`);
+        });
+        Promise.all(guestListCalls)
+          .then(vals => {
+            const eventIDs = new Set(vals.map(val => {
+              const invite = val.data.find(user => user.id === currentUserID);
+              return invite && invite.eventsID
+            }).filter(val => val));
+            const invitedTo = res.data.filter(event => eventIDs.has(event.id));
+            invitedTo.forEach(event => {
+              event.food = api.get(`/events/${event.id}/food`);
+              event.food
+                .then(res => {
+                  event.food = res.data;
+                })
+                .catch(alert);
+            });
+            Promise.all(invitedTo.map(event => event.food))
+              .then(vals => {
+                setInvites(invitedTo);
+              })
+              .catch(alert);
+          })
       })
       .catch(alert);
-  },[]);
+  },[setInvites]);
   return (
     <div className='invites'>
       {invites.map(invite => <InviteCard key={invite.id} invite={invite}/>)}
@@ -39,7 +53,7 @@ function InvitedList(props){
 }
 
 const state2props = (state) => ({
-  invites: state.invites
+  invites: state.events.invites
 });
 
-export default connect(state2props)(InvitedList);
+export default connect(state2props, { setInvites })(InvitedList);
