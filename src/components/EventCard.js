@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from 'reactstrap';
 import { connect } from 'react-redux';
 
 import { deleteEvent, editEvent } from '../actions/eventActions';
@@ -31,7 +32,7 @@ function EventCard(props){
   const onDelete = () => {
     api.delete(`/events/${event.id}`)
       .then(res => {
-	props.deleteEvent(event.id)
+        props.deleteEvent(event.id)
       })
       .catch(alert);
   };
@@ -42,10 +43,10 @@ function EventCard(props){
       eventID: event.id
     })
       .then(res => {
-	props.editEvent({
-	  ...event,
-	  food: [...event.food, res.data.food]
-	});	
+        props.editEvent({
+          ...event,
+          food: [...event.food, res.data.food]
+        });
       })
       .catch(alert);
   };
@@ -53,14 +54,14 @@ function EventCard(props){
   const onDelFoodMaker = (id) => {
     const onDelFood = () => {
       api.delete(`/food/${id}`)
-	.then(res => {
-	  const newFood = event.food.filter(item => item.id !== id);
-	  props.editEvent({
-	    ...event,
-	    food: newFood
-	  });
-	})
-	.catch(alert);
+        .then(res => {
+          const newFood = event.food.filter(item => item.id !== id);
+          props.editEvent({
+            ...event,
+            food: newFood
+          });
+        })
+        .catch(alert);
     };
     return onDelFood;
   };
@@ -72,49 +73,53 @@ function EventCard(props){
       <p>Date: {event.month} {event.day}, {event.year}</p>
       <p>Times: {event.start_time}-{event.end_time}</p>
       {event.guests && (
-	<div className='guest-list'>
-	  <h5>Who's Invited</h5>
-	  <ul>
-	    {event.guests.map(guest => <li key={guest.id}>{guest.name}</li>)}
-	  </ul>
-	</div>
+        <div className='guest-list'>
+          <h5>Who's Invited</h5>
+          <ul>
+            {event.guests.map(guest => <li key={guest.id}>{guest.name}</li>)}
+          </ul>
+        </div>
       )}
       { event.food && (
-	<div className='food-list'>
-	  <h5>Food Requests</h5>
-	  <ul>
-	    { event.food.map(item => {
-	      return (
-		<li key={item.id}>
-		  {item.name}, {item.quantity}
-		  <button onClick={onDelFoodMaker(item.id)}>&times;</button>
-		</li>
-	      );
-	    })}
-	  </ul>
-	</div>
+        <div className='food-list'>
+          <h5>Food Requests</h5>
+          <ul>
+            { event.food.map(item => {
+              return (
+                <li key={item.id}>
+                  {item.name}, {item.quantity}
+                  <button onClick={onDelFoodMaker(item.id)}>&times;</button>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       )}
       <AddFoodForm onAddFood={onAddFood}/>
       { deleteOpen ? (
-	<div className='delete-modal'>
-	  Are you Sure?
-	  <button onClick={onDelete}>
-	    Yup
-	  </button>
-	  <button onClick={onDeleteClose}>
-	    No I changed my mind
-	  </button>
-	</div>
+        <div className='delete-modal'>
+          Are you Sure?
+          <button onClick={onDelete}>
+            Yup
+          </button>
+          <button onClick={onDeleteClose}>
+            No I changed my mind
+          </button>
+        </div>
       ) : (
-	<button onClick={onDeleteOpen}>
-	  Delete Event
-	</button>
+        <button onClick={onDeleteOpen}>
+          Delete Event
+        </button>
       ) }
       <Link to={`/invite-to/${event.id}`}>
-	Invite More
+        <Button>
+          Invite More
+        </Button>
       </Link>
       <Link to={`/edit-event/${event.id}`}>
-	Edit
+        <Button>
+          Edit
+        </Button>
       </Link>
     </div>
   );
