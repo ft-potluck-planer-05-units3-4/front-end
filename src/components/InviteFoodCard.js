@@ -15,7 +15,7 @@ const currentUserID = 2;
 
 function InviteFoodCard({item, invite}) {
   const dispatch = useDispatch();
-  const onClick = (e) => {
+  const onBring = () => {
     api.put(`/food/${item.id}`, {
       eventID: item.eventID,
       userID: currentUserID,
@@ -43,12 +43,42 @@ function InviteFoodCard({item, invite}) {
       .catch(alert);
   };
 
+  const onCancel = () => {
+    api.put(`/food/${item.id}`, {
+      eventID: item.eventID,
+      userID: null,
+      category: item.category,
+      quantity: item.quantity,
+      name: item.name
+    })
+      .then(res => {
+        dispatch(editInvite({
+          ...invite,
+
+          food: invite.food.map(foodItem => {
+            if (foodItem.id === item.id){
+              return {
+                ...foodItem,
+                userID: null
+              };
+            } else {
+              return foodItem;
+            };
+          })
+
+        }));
+      })
+      .catch(alert);
+  };
+
   return (
     <li>
       <h5>{item.name}</h5>
       <p>Quantity: {item.quantity}</p>
+      Brought by:
       { item.userID || "Noone is Bringing this!" }
-      { <button onClick={onClick}>I can bring this!</button>}
+      { !item.userID && <button onClick={onBring}>I can bring this!</button>}
+      { (item.userID === currentUserID) && <button onClick={onCancel}>I don't want to bring this!</button> }
     </li>
   );
 }
