@@ -37,7 +37,6 @@ function EventCard(props){
   };
 
   const onAddFood = (newFood) => {
-    console.log(newFood);
     api.post('/food', {
       ...newFood,
       eventID: event.id
@@ -72,25 +71,29 @@ function EventCard(props){
       <p>Location: {event.location}</p>
       <p>Date: {event.month} {event.day}, {event.year}</p>
       <p>Times: {event.start_time}-{event.end_time}</p>
-      {/*      <ul>
-	<li>
-	  Who's Invited
-	</li>
-	{ event.invited.map(invitee => <li>{invitee.name}</li>)}
-	</ul> */}
-      <div className='food-list'>
-	<h5>Food Requests</h5>
-	<ul>
-	  { event.food.map(item => {
-	    return (
-	      <li key={item.id}>
-		{item.name}, {item.quantity}
-		<button onClick={onDelFoodMaker(item.id)}>&times;</button>
-	      </li>
-	    );
-	  })}
-	</ul>
-      </div>
+      {event.guests && (
+	<div className='guest-list'>
+	  <h5>Who's Invited</h5>
+	  <ul>
+	    {event.guests.map(guest => <li key={guest.id}>{guest.name}</li>)}
+	  </ul>
+	</div>
+      )}
+      { event.food && (
+	<div className='food-list'>
+	  <h5>Food Requests</h5>
+	  <ul>
+	    { event.food.map(item => {
+	      return (
+		<li key={item.id}>
+		  {item.name}, {item.quantity}
+		  <button onClick={onDelFoodMaker(item.id)}>&times;</button>
+		</li>
+	      );
+	    })}
+	  </ul>
+	</div>
+      )}
       <AddFoodForm onAddFood={onAddFood}/>
       { deleteOpen ? (
 	<div className='delete-modal'>

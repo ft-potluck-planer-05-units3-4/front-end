@@ -19,20 +19,23 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { createStore } from 'redux';
-import {useReducer} from './reducers/userReducer'
+
 import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import logger from 'redux-logger';
+import {
+  rootReducer
+} from "./reducers";//from ./reducers/index.js
 
-
-const store = createStore(useReducer);
+const store = createStore(rootReducer, (applyMiddleware(thunk,logger)));
 
 ReactDOM.render(
-  <Provider store={store}>
+  
   <React.StrictMode>
+    <Provider store={store}>
     <App />
-  </React.StrictMode>
-  </Provider>,
+    </Provider>
+  </React.StrictMode>,
   document.getElementById('root')
 );
-
-

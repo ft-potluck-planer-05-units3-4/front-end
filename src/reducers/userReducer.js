@@ -1,13 +1,3 @@
-// const initialState = {};
-// 
-// const userReducer = (state = initialState, action) => {
-//   switch(action.type) {
-//   default:
-//     return state;
-//   }
-// };
-// 
-// export default userReducer;
 import {
   REGISTER_LOADING,
   REGISTER_SUCCESS,
@@ -16,11 +6,8 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
 } from '../actions/userAction';
-
 const initialState = {
   username: '',
-  password: '',
-  email: '',
   error: '',
   isLoading: false,
   user_id: '',
@@ -28,7 +15,6 @@ const initialState = {
   message: '',
   isLoggedIn: false,
 };
-
 export const userReducer = ( state = initialState, action ) => {
   switch ( action.type ) {
     case REGISTER_LOADING:
@@ -40,8 +26,7 @@ export const userReducer = ( state = initialState, action ) => {
       return {
         ...state,
         username: action.payload.username,
-          password: action.payload.password,
-          email: action.payload.email,
+          user_id: action.payload.user_id,
           isLoading: false,
       };
     case REGISTER_FAILURE:
@@ -60,7 +45,7 @@ export const userReducer = ( state = initialState, action ) => {
       return {
         ...state,
         isLoading: false,
-          username: action.payload.username,
+          // username: action.payload.username,
           user_id: action.payload.user_id,
           token: action.payload.token,
           message: action.payload.message,
@@ -72,7 +57,6 @@ export const userReducer = ( state = initialState, action ) => {
         isLoading: false,
           error: action.payload,
       };
-
     default:
       return state;
   }

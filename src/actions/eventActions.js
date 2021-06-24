@@ -4,32 +4,37 @@ export const SET_EVENTS = 'SET_EVENTS';
 export const DELETE_EVENT = 'DELETE_EVENT';
 export const EDIT_EVENT = 'EDIT_EVENT';
 
-const setEvents = (events) => {
+const setEvents = ( events ) => {
   return {
     type: SET_EVENTS,
     payload: events
   };
 };
 
-const addEvent = (event) => {
+const addEvent = ( event ) => {
   return {
     type: ADD_EVENT,
     payload: event
   };
 };
 
-const deleteEvent = (id) => {
+const deleteEvent = ( id ) => {
   return {
     type: DELETE_EVENT,
     payload: id
   };
 };
 
-const editEvent = (event) => {
-    return {
-      type: EDIT_EVENT,
-      payload: event
-    };
+const editEvent = ( event ) => {
+  return {
+    type: EDIT_EVENT,
+    payload: event
+  };
 };
 
-export { setEvents, addEvent, deleteEvent, editEvent };
+export {
+  setEvents,
+  addEvent,
+  deleteEvent,
+  editEvent
+};
