@@ -1,15 +1,14 @@
-const initialState = {
-  attending: [],
-  invites: [],
-  events: [],
-  isLoggedIn: false,
-};
+import {
+  combineReducers
+} from "redux";
+import {
+  userReducer
+} from "./userReducer";
+import {
+  eventReducer
+} from "./eventReducer";
 
-function rootReducer(state = initialState, action) {
-  switch (action.type) {
-    default:
-      return state;
-  }
-}
-
-export default rootReducer;
+export const rootReducer = combineReducers( {
+  userReducer: userReducer,
+  eventReducer: eventReducer,
+} );

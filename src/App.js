@@ -6,28 +6,12 @@ import { createStore } from "redux";
 
 import rootReducer from "./reducers";
 
-// import PrivateRoute from "./utils/privateRoute";
-import LoginSignup from "./components/Login-Signup";
+// import PrivateRoute from './utils/privateRoute';
 import Inviting from "./components/Inviting";
 import Nav from "./components/Nav";
 import AddEvent from "./components/AddEvent";
 import EditEvent from "./components/EditEvent";
-
-const store = createStore(rootReducer);
-
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-
-import rootReducer from './reducers';
-
-import PrivateRoute from './utils/privateRoute';
-import LoginSignup from './components/Login-Signup';
-import Inviting from './components/Inviting';
-import Nav from './components/Nav';
-import AddEvent from './components/AddEvent';
-import EditEvent from './components/EditEvent';
-
+import Signup from "./components/Signup";
 const store = createStore(rootReducer);
 
 function App() {
@@ -39,9 +23,8 @@ function App() {
             <Route path="/add-event" component={AddEvent} />
             <Route path="/invite-to/:id" component={Inviting} />
             <Route path="/edit-event/:id" component={EditEvent} />
-            <Route path="/organizer" component={Nav} />
-            <Route path="/attendee" component={Nav} />
-            <Route path="/" component={LoginSignup} />
+            <Route path="Signup" component={Signup} />
+            <Route path="/" component={Nav} />
           </Switch>
         </div>
       </Router>

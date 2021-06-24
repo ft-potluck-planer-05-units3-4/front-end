@@ -1,20 +1,17 @@
 # Front End:
 
+
 ## Quick-links:
 
-| Name         | Link                                                                     | Note                                                                                                           |
-| ------------ | ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
-| front-end    | [frontend](https://github.com/ft-potluck-planer-05-units3-4/front-end)   | [deployment](https://potluck-landing.netlify.app/_)                                                            |
-| back end     | [backend](https://github.com/ft-potluck-planer-05-units3-4/backend2)     | Hosted Backend URL: https://potluck-planner1.herokuapp.com/ **Endpoints that require an authorization token**: |
-| Landing Page | [landing](https://github.com/ft-potluck-planer-05-units3-4/Landing-Page) |                                                                                                                |
-|              |                                                                          |                                                                                                                |
-| #            | #                                                                        | #                                                                                                              |
-| #            | #                                                                        | #                                                                                                              |
-| #            | #                                                                        | #                                                                                                              |
-| #            | #                                                                        | #                                                                                                              |
-| #            | #                                                                        | #                                                                                                              |
-| #            | #                                                                        | #                                                                                                              |
-| #            | #                                                                        | #                                                                                                              |
+
+
+
+
+
+
+
+
+
 
 # Potluck Planner
 
@@ -44,7 +41,11 @@ In the world of social gatherings and potlucks the "Potluck Planner" is king. Th
 
 2. Ability to upload multiple `photos` from the potluck gathering, like a photo gallery for a past event.
 
+
+
+
 ![](component-hierarchy.png)
+
 
 
 ---
