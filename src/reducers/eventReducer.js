@@ -3,7 +3,6 @@ import {
 } from '../actions/eventActions';
 
 const initialState = {
-  attending: [],
   invites: [],
   events: []
 };
