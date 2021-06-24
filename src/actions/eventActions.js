@@ -3,7 +3,10 @@ export const LOAD_DATA = 'LOAD_DATA';
 export const SET_EVENTS = 'SET_EVENTS';
 export const DELETE_EVENT = 'DELETE_EVENT';
 export const EDIT_EVENT = 'EDIT_EVENT';
-export const SET_INVITES = 'SET_INVITES'
+export const SET_INVITES = 'SET_INVITES';
+export const DELETE_INVITE = 'DELETE_INVITE';
+export const EDIT_INVITE = 'EDIT_INVITE';
+
 
 const setEvents = (events) => {
   return {
@@ -17,6 +20,20 @@ const setInvites = (invites) => {
     type: SET_INVITES,
     payload: invites
   }
+};
+
+const editInvite = (invite) => {
+  return {
+    type: EDIT_INVITE,
+    payload: invite
+  };
+};
+
+const deleteInvite = (id) => {
+  return {
+    type: DELETE_INVITE,
+    payload: id
+  };
 };
 
 const addEvent = (event) => {
@@ -40,4 +57,4 @@ const editEvent = (event) => {
     };
 };
 
-export { setInvites, setEvents, addEvent, deleteEvent, editEvent };
+export { deleteInvite, editInvite, setInvites, setEvents, addEvent, deleteEvent, editEvent };
