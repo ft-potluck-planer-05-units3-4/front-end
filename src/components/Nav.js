@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { Switch, Route, Link, Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
-
+import { Signup } from './Signup';
 import { setEvents } from "../actions/eventActions";
 
 import Inviting from "./Inviting";
 import EventsList from "./EventsList";
-import InvitedList from "./InvitedList";
+import UserEventList from "./UserEventList";
 
 import axios from "axios";
 const api = axios.create({
@@ -72,13 +72,18 @@ function Nav(props) {
         <Switch>
           <Route path="/invite-to/:id" component={Inviting} />
           <Route path="/attendee">
-            <InvitedList />
+            <UserEventList />
           </Route>
           <Route path="/organizer">
             <EventsList />
           </Route>
+        
+          <Route path="/signup">
+            <Signup />
+          </Route>
           <Route path="/">
-            <Redirect to="/organizer" /> {/* Replace Me */}
+            <Redirect to="/signup" /> {/* Replace Me */}
+          
           </Route>
         </Switch>
       </main>
