@@ -4,7 +4,7 @@
 
 // export default LoginSignup;
 import React, { useState } from "react";
-const Signup = () => {
+export const Signup = () => {
   const [formData, setFormData] = useState({
     userName: "",
     password: "",
