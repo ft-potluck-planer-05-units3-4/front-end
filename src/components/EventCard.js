@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, CardBody, CardHeader } from 'reactstrap';
+import { Card, CardBody, CardHeader, CardText, CardSubtitle, List, ListInlineItem } from 'reactstrap';
 import { connect } from 'react-redux';
 
 import { deleteEvent, editEvent } from '../actions/eventActions';
@@ -69,17 +69,18 @@ function EventCard(props){
   return (
       <Card>
         <CardHeader tag='h3'>{event.title}</CardHeader>
-        <CardBody>
-          <p>Location: {event.location}</p>
-          <p>Date: {event.month} {event.day}, {event.year}</p>
-          <p>Times: {event.start_time}-{event.end_time}</p>
+          <CardBody>
+	    <CardSubtitle className='text-muted'>Location:</CardSubtitle>
+            <CardText>{event.location}</CardText>
+	    <CardSubtitle className='text-muted'>Date:</CardSubtitle>
+            <CardText>{event.month} {event.day}, {event.year}</CardText>
+	    <CardSubtitle className='text-muted'>Times:</CardSubtitle>
+          <CardText>{event.start_time}-{event.end_time}</CardText>
           {event.guests && (
-            <div className='guest-list'>
+            <List type='inline'>
               <h5>Who's Invited</h5>
-              <ul>
-                {event.guests.map(guest => <li key={guest.id}>{guest.name}</li>)}
-              </ul>
-            </div>
+                {event.guests.map(guest => <ListInlineItem key={guest.id}>{guest.name}</ListInlineItem>)}
+            </List>
           )}
           { event.food && (
             <div className='food-list'>
