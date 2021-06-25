@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Switch, Route, Link, Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { Button, Nav as BootStrapNav, Navbar, NavItem, NavLink } from 'reactstrap';
+import { Nav as BootStrapNav, Navbar, NavItem, NavLink } from 'reactstrap';
 import { setEvents } from '../actions/eventActions';
 
 import Inviting from './Inviting';

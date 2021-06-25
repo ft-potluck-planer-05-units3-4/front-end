@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Card, CardBody, CardTitle, CardHeader } from 'reactstrap';
+import { Button, Card, CardBody, CardHeader } from 'reactstrap';
 import { connect } from 'react-redux';
 
 import { deleteEvent, editEvent } from '../actions/eventActions';
