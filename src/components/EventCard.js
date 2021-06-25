@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Card, CardBody, CardHeader } from 'reactstrap';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 import { connect } from 'react-redux';
 
 import { deleteEvent, editEvent } from '../actions/eventActions';
@@ -113,14 +113,14 @@ function EventCard(props){
             </button>
           ) }
           <Link to={`/invite-to/${event.id}`}>
-            <Button>
+            <button>
               Invite More
-            </Button>
+            </button>
           </Link>
           <Link to={`/edit-event/${event.id}`}>
-            <Button>
+            <button>
               Edit
-            </Button>
+            </button>
           </Link>
         </CardBody>
       </Card>
