@@ -1,10 +1,10 @@
-// function LoginSignup(){
-//     return "Please Replace Me";
-// }
-
-// export default LoginSignup;
 import React, { useState } from "react";
+import { useDispatch } from 'react-redux';
+
+import { signUp } from '../actions/userActions';
+
 const Signup = () => {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     userName: "",
     password: "",
@@ -18,6 +18,7 @@ const Signup = () => {
 
   const onSubmit = (evt) => {
     evt.preventDefault();
+    dispatch(signUp(formData));
     // console.log("FormData:",formData);
     //     const loginCreds = {
     //       username: formData.username.trim (),

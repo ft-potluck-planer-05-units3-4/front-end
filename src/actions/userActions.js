@@ -8,7 +8,7 @@ const api = axios.create( {
   baseURL: "https://potluck-planner1.herokuapp.com/api",
  
 } );
- export signUp = ( dispatch, user ) => {
+export const signUp = ( dispatch, user ) => {
   dispatch({type:SIGNUP_LOADING})
    api.post( '/auth/register/', user )
      .then( res => {
