@@ -1,12 +1,13 @@
-// function LoginSignup(){
-//     return "Please Replace Me";
-// }
-
-// export default LoginSignup;
 import React, { useState } from "react";
-export const Signup = () => {
+import { useDispatch } from 'react-redux';
+
+import { signUp } from '../actions/userActions';
+
+const Signup = () => {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
-    userName: "",
+    name: '',
+    username: "",
     password: "",
   });
   const updateFormData = (event) =>
@@ -14,10 +15,11 @@ export const Signup = () => {
       ...formData,
       [event.target.name]: event.target.value,
     });
-  const { userName, password } = formData;
+  const { name, username, password } = formData;
 
   const onSubmit = (evt) => {
     evt.preventDefault();
+    dispatch(signUp(formData));
     // console.log("FormData:",formData);
     //     const loginCreds = {
     //       username: formData.username.trim (),
@@ -30,11 +32,18 @@ export const Signup = () => {
   return (
     <form>
       <input
-        value={userName}
+        value={name}
+        onChange={(e)=> updateFormData(e)}
+        name='name'
+        type='text'
+        placeholder='Name'
+      />
+      <input
+        value={username}
         onChange={(e) => updateFormData(e)}
         placeholder="User Name"
         type="text"
-        name="userName"
+        name="username"
         required
       />
       <input

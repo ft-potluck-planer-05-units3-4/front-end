@@ -5,16 +5,19 @@ export const  SIGNUP_SUCESS= 'SIGNUP_SUCESS';
 export const  SIGNUP_ERROR= 'SIGNUP_ERROR';
 export const  SIGNUP_LOADING= 'SIGNUP_LOADING';
 const api = axios.create( {
-  baseURL: "https://potluck-planner1.herokuapp.com/api",
+  baseURL: "https://potluck-planner1.herokuapp.com",
  
 } );
- export signUp = ( dispatch, user ) => {
-  dispatch({type:SIGNUP_LOADING})
-   api.post( '/auth/register/', user )
+export const signUp = (user) => {
+    return (dispatch) => {
+        console.log(user)
+   api.post( '/auth/register', user )
      .then( res => {
-       dispatch( { type: SIGNUP_SUCESS, payload: res.data.userName } )
+       dispatch( { type: SIGNUP_SUCESS, payload: res.data.username } )
        console.log( res.data );
    })
-  
+        return {type:SIGNUP_LOADING};
+    }
+
   
 }

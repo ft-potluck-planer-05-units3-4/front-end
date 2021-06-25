@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Switch, Route, Link, Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { Signup } from './Signup';
+import Signup from './Signup';
 import { setEvents } from "../actions/eventActions";
 import Inviting from "./Inviting";
 import EventsList from "./EventsList";
