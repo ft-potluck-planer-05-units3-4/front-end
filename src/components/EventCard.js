@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, CardBody, CardHeader, CardText, CardSubtitle, List, ListInlineItem } from 'reactstrap';
+import {
+  Card, CardBody, CardHeader, CardText, CardSubtitle, List, ListInlineItem,
+  Modal, ModalHeader, ModalBody
+} from 'reactstrap';
 import { connect } from 'react-redux';
 
 import { deleteEvent, editEvent } from '../actions/eventActions';
@@ -20,14 +23,16 @@ function EventCard(props){
 
   const { event } = props;
 
-
-  const onDeleteOpen = () => {
-    setDeleteOpen(true);
+  const deleteToggle = () => {
+    setDeleteOpen(!deleteOpen);
   };
+  // const onDeleteOpen = () => {
+  //   setDeleteOpen(true);
+  // };
 
-  const onDeleteClose = () => {
-    setDeleteOpen(false);
-  };
+  // const onDeleteClose = () => {
+  //   setDeleteOpen(false);
+  // };
 
   const onDelete = () => {
     api.delete(`/events/${event.id}`)
@@ -97,22 +102,15 @@ function EventCard(props){
               </ul>
             </div>
           )}
-          <AddFoodForm onAddFood={onAddFood}/>
-          { deleteOpen ? (
-            <div className='delete-modal'>
-              Are you Sure?
-              <button onClick={onDelete}>
-                Yup
-              </button>
-              <button onClick={onDeleteClose}>
-                No I changed my mind
-              </button>
-            </div>
-          ) : (
-            <button onClick={onDeleteOpen}>
-              Delete Event
-            </button>
-          ) }
+            <AddFoodForm onAddFood={onAddFood}/>
+	    <button onClick={deleteToggle}>Delete Event</button>
+	    <Modal isOpen={deleteOpen} toggle={deleteToggle}>
+	      <ModalHeader toggle={deleteToggle}>Are you sure?</ModalHeader>
+	      <ModalBody>
+		<button onClick={onDelete}>Yup</button>
+		<button onClick={deleteToggle}>Cancel</button>
+	      </ModalBody>
+	    </Modal>
           <Link to={`/invite-to/${event.id}`}>
             <button>
               Invite More
