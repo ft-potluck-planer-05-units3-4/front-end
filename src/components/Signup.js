@@ -6,7 +6,8 @@ import { signUp } from '../actions/userActions';
 const Signup = () => {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
-    userName: "",
+    name: '',
+    username: "",
     password: "",
   });
   const updateFormData = (event) =>
@@ -14,7 +15,7 @@ const Signup = () => {
       ...formData,
       [event.target.name]: event.target.value,
     });
-  const { userName, password } = formData;
+  const { name, username, password } = formData;
 
   const onSubmit = (evt) => {
     evt.preventDefault();
@@ -31,11 +32,18 @@ const Signup = () => {
   return (
     <form>
       <input
-        value={userName}
+        value={name}
+        onChange={(e)=> updateFormData(e)}
+        name='name'
+        type='text'
+        placeholder='Name'
+      />
+      <input
+        value={username}
         onChange={(e) => updateFormData(e)}
         placeholder="User Name"
         type="text"
-        name="userName"
+        name="username"
         required
       />
       <input
