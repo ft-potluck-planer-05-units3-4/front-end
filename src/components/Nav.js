@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Switch, Route, Link, Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { Button } from 'reactstrap';
+import { Button, Nav as BootStrapNav, Navbar, NavItem, NavLink } from 'reactstrap';
 import { setEvents } from '../actions/eventActions';
 
 import Inviting from './Inviting';
@@ -56,29 +56,41 @@ function Nav(props) {
 
   return (
     <>
-      <header>
-        <Switch>
-          <Route path='/attendee'>
-            <Link to='/organizer'>
-              <Button>
-                Organizer Menu
-              </Button>
-            </Link>
-          </Route>
-          <Route path='/organizer'>
-            <Link to='/attendee'>
-              <Button>
-                Attendee Menu
-              </Button>
-            </Link>
-            <Link to='/add-event'>
-              <Button>
-                Add Potluck
-              </Button>
-            </Link>
-          </Route>
-        </Switch>
-      </header>
+      <Navbar light>
+        <BootStrapNav>
+          <Switch>
+            <Route path='/attendee'>
+              <NavItem>
+                <NavLink tag={Link} to='/organizer'>
+                  Organizer Menu
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink tag={Link} to='/attendee'>
+                  Attendee Menu
+                </NavLink>
+              </NavItem>
+            </Route>
+            <Route path='/organizer'>
+              <NavItem>
+                <NavLink tag={Link} to='/organizer'>
+                  Organizer Menu
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink tag={Link} to='/attendee'>
+                  Attendee Menu
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink tag={Link} to='/add-event'>
+                  Add Potluck
+                </NavLink>
+              </NavItem>
+            </Route>
+          </Switch>
+        </BootStrapNav>
+      </Navbar>
       <main>
         <Switch>
           <Route path='/invite-to/:id' component={Inviting}/>
