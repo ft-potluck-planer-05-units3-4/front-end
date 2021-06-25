@@ -1,20 +1,24 @@
 import React, { useState } from 'react';
+import {
+  Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter
+} from 'reactstrap';
+import styled from 'styled-components';
+
+const StyledInput = styled(Input)`
+width: 95%;
+`;
 
 function AddFoodForm({onAddFood}) {
   const [formVal, setFormVal] = useState({
     category: '',
-    quantity: '1',
+    quantity: '',
     name: ''
   });
 
-  const [Open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const onOpen = () => {
-    setOpen(true);
-  };
-
-  const onClose = () => {
-    setOpen(false);
+  const openToggle = () => {
+    setIsOpen(!isOpen);
   };
 
   const onChange = (e) => {
@@ -28,49 +32,62 @@ function AddFoodForm({onAddFood}) {
     e.preventDefault();
     onAddFood({
       ...formVal,
-      quantity: Number(formVal.quantity)
+      quantity: formVal.quantity
     });
-    setOpen(false);
+    setIsOpen(false);
   };
   
-  return (Open ? (
-    <div className='add-food-modal'>
-      <form onSubmit={onSubmit}>
-	<label>
-	  Name
-	  <input
-	    name='name'
-	    value={formVal.name}
-	    onChange={onChange}
-	    type='text'
-	  />
-	</label>
-	<label>
-	  Quantity
-	  <input
-	    name='quantity'
-	    value={formVal.quantity}
-	    onChange={onChange}
-	    type='number'
-	    min='0'
-	    step='any'
-	  />
-	</label>
-	<label>
-	  Category
-	  <input
-	    name='category'
-	    value={formVal.category}
-	    onChange={onChange}
-	    type='text'
-	  />
-	</label>
-	<button>Add Food</button>
-      </form>
-      <button onClick={onClose}>Cancel</button>
-    </div>) : (
-      <button onClick={onOpen}>Add Food</button>
-    ));
+  return (
+    <>
+      <Modal isOpen={isOpen} toggle={openToggle}>
+	<ModalHeader toggle={openToggle}>Add Food</ModalHeader>
+	<ModalBody>
+	  <Form onSubmit={onSubmit}>
+	    <FormGroup>
+	      <Label for='food-name-input'>
+		Name
+	      </Label>
+	      <StyledInput
+		name='name'
+		value={formVal.name}
+		onChange={onChange}
+		type='text'
+		id='food-name-input'
+	      />
+	    </FormGroup>
+	    <FormGroup>
+	      <Label>
+		Quantity
+	      </Label>
+	      <StyledInput
+		name='quantity'
+		value={formVal.quantity}
+		onChange={onChange}
+		type='text'
+		id='food-quantity-input'
+	      />
+	    </FormGroup>
+	    <FormGroup>
+	      <Label>
+		Category
+	      </Label>
+	      <StyledInput
+		name='category'
+		value={formVal.category}
+		onChange={onChange}
+		type='text'
+	      />
+	    </FormGroup>
+	    <button>Add Food</button>
+	  </Form>
+	</ModalBody>
+	<ModalFooter>
+	  <button onClick={openToggle}>Cancel</button>
+	</ModalFooter>
+      </Modal>
+      <button onClick={openToggle}>Add Food</button>
+    </>
+      );
 }
 
 export default AddFoodForm;
