@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Card, CardBody, CardHeader, CardText, CardSubtitle, List, ListInlineItem,
-  Modal, ModalHeader, ModalBody
+  Modal, ModalHeader, ModalBody, Collapse, ListGroup, ListGroupItem
 } from 'reactstrap';
 import { connect } from 'react-redux';
 
@@ -20,19 +20,17 @@ const api = axios.create({
 
 function EventCard(props){
   const [deleteOpen, setDeleteOpen] = useState(false);
+  const [foodOpen, setFoodOpen] = useState(false);
 
   const { event } = props;
 
   const deleteToggle = () => {
     setDeleteOpen(!deleteOpen);
   };
-  // const onDeleteOpen = () => {
-  //   setDeleteOpen(true);
-  // };
 
-  // const onDeleteClose = () => {
-  //   setDeleteOpen(false);
-  // };
+  const foodToggle = () => {
+    setFoodOpen(!foodOpen);
+  }
 
   const onDelete = () => {
     api.delete(`/events/${event.id}`)
@@ -72,57 +70,64 @@ function EventCard(props){
   };
 
   return (
-      <Card>
-        <CardHeader tag='h3'>{event.title}</CardHeader>
-          <CardBody>
-	    <CardSubtitle className='text-muted'>Location:</CardSubtitle>
-            <CardText>{event.location}</CardText>
-	    <CardSubtitle className='text-muted'>Date:</CardSubtitle>
-            <CardText>{event.month} {event.day}, {event.year}</CardText>
-	    <CardSubtitle className='text-muted'>Times:</CardSubtitle>
-          <CardText>{event.start_time}-{event.end_time}</CardText>
-          {event.guests && (
-            <List type='inline'>
-              <h5>Who's Invited</h5>
-                {event.guests.map(guest => <ListInlineItem key={guest.id}>{guest.name}</ListInlineItem>)}
-            </List>
-          )}
-          { event.food && (
-            <div className='food-list'>
-              <h5>Food Requests</h5>
-              <ul>
-                { event.food.map(item => {
-                  return (
-                    <li key={item.id}>
-                      {item.name}, {item.quantity}
-                      <button onClick={onDelFoodMaker(item.id)}>&times;</button>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          )}
-            <AddFoodForm onAddFood={onAddFood}/>
-	    <button onClick={deleteToggle}>Delete Event</button>
-	    <Modal isOpen={deleteOpen} toggle={deleteToggle}>
-	      <ModalHeader toggle={deleteToggle}>Are you sure?</ModalHeader>
-	      <ModalBody>
-		<button onClick={onDelete}>Yup</button>
-		<button onClick={deleteToggle}>Cancel</button>
-	      </ModalBody>
-	    </Modal>
-          <Link to={`/invite-to/${event.id}`}>
-            <button>
-              Invite More
-            </button>
-          </Link>
-          <Link to={`/edit-event/${event.id}`}>
-            <button>
-              Edit
-            </button>
-          </Link>
-        </CardBody>
-      </Card>
+    <Card>
+      <CardHeader tag='h3'>{event.title}</CardHeader>
+      <CardBody>
+        <CardSubtitle className='text-muted'>Location:</CardSubtitle>
+        <CardText>{event.location}</CardText>
+        <CardSubtitle className='text-muted'>Date:</CardSubtitle>
+        <CardText>{event.month} {event.day}, {event.year}</CardText>
+        <CardSubtitle className='text-muted'>Times:</CardSubtitle>
+        <CardText>{event.start_time}-{event.end_time}</CardText>
+        { (event.guests && !!event.guests.length) && (
+          <List type='inline'>
+            <h5>Who's Invited</h5>
+            {event.guests.map(guest => <ListInlineItem key={guest.id}>{guest.name}</ListInlineItem>)}
+          </List>
+        )}
+        { (event.food && !!event.food.length) && (
+          <ListGroup> {/* Fix me, this button in a listgroupItem sucks*/}
+            <ListGroupItem>
+              Food Requests
+            <button onClick={foodToggle}>{foodOpen ? (
+              <>&#9650;</>
+            ) : (
+              <>&#9660;</>
+            )}</button>
+              </ListGroupItem>
+          <Collapse isOpen={foodOpen}>
+              { event.food.map(item => {
+                return (
+                  <ListGroupItem key={item.id}>
+                    {item.name}, {item.quantity}
+                    <button onClick={onDelFoodMaker(item.id)}>&times;</button>
+                  </ListGroupItem>
+                );
+              })}
+          </Collapse>
+            </ListGroup>
+        )}
+        <AddFoodForm onAddFood={onAddFood}/>
+        <button onClick={deleteToggle}>Delete Event</button>
+        <Modal isOpen={deleteOpen} toggle={deleteToggle}>
+          <ModalHeader toggle={deleteToggle}>Are you sure?</ModalHeader>
+          <ModalBody>
+            <button onClick={onDelete}>Yup</button>
+            <button onClick={deleteToggle}>Cancel</button>
+          </ModalBody>
+        </Modal>
+        <Link to={`/invite-to/${event.id}`}>
+          <button>
+            Invite More
+          </button>
+        </Link>
+        <Link to={`/edit-event/${event.id}`}>
+          <button>
+            Edit
+          </button>
+        </Link>
+      </CardBody>
+    </Card>
   );
 }
 
