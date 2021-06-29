@@ -1,5 +1,5 @@
 import  axios  from 'axios';
-import { axiosWauth } from './../utils/axiosWauth';
+// import { axiosWauth } from './../utils/axiosWauth';
 
 export const  SIGNUP_SUCESS= 'SIGNUP_SUCESS';
 export const  SIGNUP_ERROR= 'SIGNUP_ERROR';
