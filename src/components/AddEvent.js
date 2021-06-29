@@ -48,9 +48,9 @@ function AddEvent(props){
       end_time: Number(formVal.end_time)
     };
     api.post('/events', typeCorrected)
-       .then(res => {
-  props.addEvent(res.data.event);
-  push('/organizer');
+      .then(res => {
+        props.addEvent(res.data.event);
+        push('/organizer');
       })
       .catch(alert)
   };
@@ -153,6 +153,7 @@ function AddEvent(props){
           type='text'
           onChange={onChange}
           placeholder='Event Location'
+          id='event-location-input'
         />
       </FormGroup>
       <button>Submit</button>
