@@ -1,10 +1,10 @@
-// import axios from 'axios';
-// const api = axios.create({
-//   baseURL: 'https://potluck-planner1.herokuapp.com',
-//   headers: {
-//     Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0Ijo2LCJuYW1lIjoiVGVzdGVyIiwidXNlcm5hbWUiOiJUZXN0ZXIiLCJpYXQiOjE2MjQ5OTMxMDEsImV4cCI6MTYyNTU5NzkwMX0.-c7yrBn4ZTE7VQECaOe7Ke9a0FIDJynxGQS3185VRlE'
-//   }
-// });
+import axios from 'axios';
+const api = axios.create({
+  baseURL: 'https://potluck-planner1.herokuapp.com/api',
+  headers: {
+    Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0Ijo2LCJuYW1lIjoiVGVzdGVyIiwidXNlcm5hbWUiOiJUZXN0ZXIiLCJpYXQiOjE2MjQ5OTMxMDEsImV4cCI6MTYyNTU5NzkwMX0.-c7yrBn4ZTE7VQECaOe7Ke9a0FIDJynxGQS3185VRlE'
+  }
+});
 
 export const ADD_EVENT = 'ADD_EVENT';
 export const SET_EVENTS = 'SET_EVENTS';
@@ -27,6 +27,96 @@ export const EDIT_INVITE = 'EDIT_INVITE';
 //         return {type:SIGNUP_LOADING};
 //     }
 // }
+
+const loadEvents = () => {
+  return (dispatch) => {
+    api.get('/events')
+      .then(res => {
+        const returnEvents = res.data.map(event => {
+          return {
+            ...event,
+            food: api.get(`/events/${event.id}/food`),
+            guests: api.get(`/events/${event.id}/guests`)
+          };
+        });
+        returnEvents.forEach(event => {
+          event.food
+            .then(res => {
+              event.food = res.data;
+            })
+            .catch(alert);
+          event.guests
+            .then(res => {
+              event.guests = res.data;
+            })
+            .catch(alert);
+        });
+        const allApiCalls = returnEvents
+              .map(event => event.food)
+              .concat(returnEvents
+                      .map(event => event.guests));
+        Promise.all(allApiCalls)
+          .then(vals => {
+            dispatch({
+              type: SET_EVENTS,
+              payload: returnEvents
+            });
+          })
+          .catch(alert);
+      })
+  }
+}
+
+const loadInvites = () => {
+  return (dispatch) => {
+    api
+      .get( "/events/" ) //endpoint
+      .then( ( res ) => {
+        const guestListCalls = res.data.map( ( event ) => {
+          return api.get( `/events/${ event.id }/guests` ); //guests for event.id
+        } );
+        //once api calls resolve
+        Promise.all( guestListCalls ).then( ( vals ) => {
+          const eventIDs = new Set(
+            vals //val is an element of vals which is an array of results of the guestListCalls (array of guest lists...)
+              .map( ( val ) => {
+                //map results of calls to invites
+                const invite = val.data.find(
+                  ( user ) => user.id === 2 // Change this to come from state
+                );
+                return invite && invite.eventsID; //if both truthy put into set eventId's (eventId's are for the given user)
+              } )
+              .filter( ( val ) => val ) //filter removes falsey values from array eventId's
+          );
+          const invitedTo = res.data.filter( ( event ) => eventIDs.has( event.id ) );
+          invitedTo.forEach( ( event ) => {
+            event.food = api.get( `/events/${ event.id }/food` );
+            event.food
+              .then( ( res ) => {
+                event.food = res.data;
+              } )
+              .catch( alert );
+          } );
+          Promise.all( invitedTo.map( ( event ) => event.food ) )
+            .then( ( vals ) => {
+              dispatch({
+                type: SET_INVITES,
+                payload: invitedTo
+              });
+            })
+            .catch(alert);
+        });
+      })
+      .catch( alert );
+  }
+}
+
+const load = () => {
+  return (dispatch) => {
+    dispatch(loadEvents);
+    dispatch(loadInvites);
+  }
+}
 
 const setEvents = (events) => {
   return {
@@ -77,4 +167,4 @@ const editEvent = (event) => {
     };
 };
 
-export { deleteInvite, editInvite, setInvites, setEvents, addEvent, deleteEvent, editEvent };
+export { load, loadInvites, deleteInvite, editInvite, setInvites, loadEvents, setEvents, addEvent, deleteEvent, editEvent };
