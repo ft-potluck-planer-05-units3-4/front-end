@@ -146,7 +146,6 @@ const load = () => {
   return (dispatch) => {
     Promise.all([eventLoader(), inviteLoader()])
       .then(vals => {
-        console.log(vals);
         dispatch({
           type: SET_EVENTS,
           payload: vals[0]
