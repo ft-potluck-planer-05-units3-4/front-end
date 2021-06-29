@@ -76,7 +76,7 @@ function InviteFoodCard({ item, invite }) {
   };
 
   return (
-    <li>
+    <>
       <h5>{item.name}</h5>
       <p>Quantity: {item.quantity}</p>
       Brought by:
@@ -85,7 +85,7 @@ function InviteFoodCard({ item, invite }) {
       {item.userID === currentUserID && (
         <button onClick={onCancel}>I don't want to bring this!</button>
       )}
-    </li>
+    </>
   );
 }
 
