@@ -1,13 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import InviteCard from './InviteCard';
-import { loadInvites } from '../actions/eventActions';
 
 function UserEventList(props){
-  const { invites, loadInvites } = props;
-  useEffect( () => {
-    loadInvites();
-  }, [loadInvites] );
+  const { invites } = props;
 
   return (
     <div className="invites">
@@ -22,6 +18,4 @@ const state2props = ( state ) => ( {
   invites: state.events.invites,
 } );
 
-export default connect( state2props, {
-  loadInvites
-} )( UserEventList );
+export default connect(state2props)( UserEventList );

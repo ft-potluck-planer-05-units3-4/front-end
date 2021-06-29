@@ -8,12 +8,13 @@ import UserEventList from "./UserEventList";
 import AddEvent from './AddEvent';
 import EditEvent from './EditEvent';
 import { Nav as BootStrapNav, Navbar, NavItem, NavLink } from 'reactstrap';
-import { loadEvents } from '../actions/eventActions';
+import { eventLoader, load } from '../actions/eventActions';
 
 function Nav(props) {
   const dispatch = useDispatch();
   useEffect(()=> {
-    dispatch(loadEvents());
+    dispatch(load());
+    eventLoader();
   }, [dispatch]);
 
   return (
