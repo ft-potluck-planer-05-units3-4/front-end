@@ -5,6 +5,8 @@ import Signup from './Signup';
 import Inviting from "./Inviting";
 import EventsList from "./EventsList";
 import UserEventList from "./UserEventList";
+import AddEvent from './AddEvent';
+import EditEvent from './EditEvent';
 import { Nav as BootStrapNav, Navbar, NavItem, NavLink } from 'reactstrap';
 import { setEvents } from '../actions/eventActions';
 
@@ -106,8 +108,8 @@ function Nav(props) {
           <Route path="/">
             <Redirect to="/signup" /> {/* Replace Me */}
           </Route>
-         
-     
+          <Route path="/add-event" component={AddEvent} />
+          <Route path="/edit-event/:id" component={EditEvent} />
         </Switch>
       </main>
     </>
