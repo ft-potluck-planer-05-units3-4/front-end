@@ -1,10 +1,10 @@
-import axios from 'axios';
-const api = axios.create({
-  baseURL: 'https://potluck-planner1.herokuapp.com',
-  headers: {
-    Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0Ijo2LCJuYW1lIjoiVGVzdGVyIiwidXNlcm5hbWUiOiJUZXN0ZXIiLCJpYXQiOjE2MjQ5OTMxMDEsImV4cCI6MTYyNTU5NzkwMX0.-c7yrBn4ZTE7VQECaOe7Ke9a0FIDJynxGQS3185VRlE'
-  }
-});
+// import axios from 'axios';
+// const api = axios.create({
+//   baseURL: 'https://potluck-planner1.herokuapp.com',
+//   headers: {
+//     Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0Ijo2LCJuYW1lIjoiVGVzdGVyIiwidXNlcm5hbWUiOiJUZXN0ZXIiLCJpYXQiOjE2MjQ5OTMxMDEsImV4cCI6MTYyNTU5NzkwMX0.-c7yrBn4ZTE7VQECaOe7Ke9a0FIDJynxGQS3185VRlE'
+//   }
+// });
 
 export const ADD_EVENT = 'ADD_EVENT';
 export const SET_EVENTS = 'SET_EVENTS';
