@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Card, CardHeader, CardBody, CardSubtitle, CardText } from 'reactstrap';
-
+import {
+  Card, CardHeader, CardBody, CardSubtitle, CardText,
+  Modal, ModalHeader, ModalBody
+} from 'reactstrap';
 import InviteFoodCard from './InviteFoodCard';
 
 import { deleteInvite } from '../actions/eventActions';
@@ -17,7 +19,13 @@ const api = axios.create({
 const currentUserID = 2;
 
 function InviteCard({invite}) {
+  const [declineOpen, setDeclineOpen] = useState(false);
   const dispatch = useDispatch();
+
+  const declineToggle = () => {
+    setDeclineOpen(!declineOpen);
+  };
+
   const onDecline = (e) => {
     api.delete(`/events/${invite.id}/guests/${currentUserID}`)
       .then(res => {
@@ -44,7 +52,14 @@ function InviteCard({invite}) {
           </>
         )}
         {/* <button>RSVP</button> */}
-        <button onClick={onDecline}>Decline Invitation</button>
+        <button onClick={declineToggle}>Decline Invitation</button>
+        <Modal isOpen={declineOpen} toggle={declineToggle}>
+          <ModalHeader toggle={declineToggle}>Are you sure?</ModalHeader>
+          <ModalBody>
+            <button onClick={onDecline}>Yup</button>
+            <button onClick={declineToggle}>Cancel</button>
+          </ModalBody>
+        </Modal>
       </CardBody>
     </Card>
   );
