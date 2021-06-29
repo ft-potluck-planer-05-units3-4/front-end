@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   Card, CardHeader, CardBody, CardSubtitle, CardText,
-  Modal, ModalHeader, ModalBody
+  Modal, ModalHeader, ModalBody,
+  ListGroup, ListGroupItem, Collapse
 } from 'reactstrap';
 import InviteFoodCard from './InviteFoodCard';
 
@@ -20,11 +21,16 @@ const currentUserID = 2;
 
 function InviteCard({invite}) {
   const [declineOpen, setDeclineOpen] = useState(false);
+  const [foodOpen, setFoodOpen] = useState(false);
   const dispatch = useDispatch();
 
   const declineToggle = () => {
     setDeclineOpen(!declineOpen);
   };
+
+  const foodToggle = () => {
+    setFoodOpen(!foodOpen);
+  }
 
   const onDecline = (e) => {
     api.delete(`/events/${invite.id}/guests/${currentUserID}`)
@@ -44,12 +50,25 @@ function InviteCard({invite}) {
         <CardSubtitle className='text-muted'>Times:</CardSubtitle>
         <CardText>{invite.start_time}-{invite.end_time}</CardText>
         { !!invite.food.length && (
-          <>
-            <h5>Food Requests: </h5>
-            <ul>
-              {invite.food.map(item => <InviteFoodCard key={item.id} item={item} invite={invite}/>)}
-            </ul>
-          </>
+          <ListGroup>
+            <ListGroupItem>
+              Food Requests
+              <button onClick={foodToggle}>{foodOpen ? (
+                <>&#9650;</>
+              ) : (
+                <>&#9660;</>
+              )}</button>
+            </ListGroupItem>
+            <Collapse isOpen={foodOpen}>
+              {invite.food.map(item => {
+                return (
+                  <ListGroupItem>
+                    <InviteFoodCard key={item.id} item={item} invite={invite}/>
+                  </ListGroupItem>
+                );
+              })}
+            </Collapse>
+          </ListGroup>
         )}
         {/* <button>RSVP</button> */}
         <button onClick={declineToggle}>Decline Invitation</button>
