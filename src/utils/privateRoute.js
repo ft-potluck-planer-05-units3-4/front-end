@@ -11,7 +11,7 @@ function PrivateRoute({isLoggedIn, ...rest}) {
 }
 
 const state2props = (state) => ({
-  isLoggedIn: state.isLoggedIn
+  isLoggedIn: state.user.isLoggedIn
 });
 
 export default connect(state2props)(PrivateRoute);

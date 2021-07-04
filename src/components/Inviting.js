@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { connect } from 'react-redux';
+import {
+  Input, Form, ListGroup, ListGroupItem
+} from 'reactstrap';
 import { editEvent } from '../actions/eventActions';
 
 import axios from 'axios';
@@ -85,22 +88,24 @@ function Inviting(props) {
   };
   
   return (
-    <form onSubmit={onSubmit}>
+    <Form onSubmit={onSubmit}>
+      <ListGroup>
       { users.map(user => {
 	return (
-	  <label key={user.id}>
-	    {user.name}
-	    <input
-	      name={user.id}
-	      type='checkbox'
-	      checked={user.invited}
-	      onChange={onChange}
-	    />
-	  </label>
+    <ListGroupItem key={user.id}>
+	    <span>{user.name}</span>
+	        <Input
+	          name={user.id}
+	          type='checkbox'
+	          checked={user.invited}
+	          onChange={onChange}
+	        />
+      </ListGroupItem>
 	);
       })}
+        </ListGroup>
       <button>Invite</button>
-    </form>
+    </Form>
   );
 }
 
