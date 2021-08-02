@@ -55,7 +55,7 @@ In the world of social gatherings and potlucks the "Potluck Planner" is king. Th
 
 # Potluck Planner API
 
-Hosted Backend URL: https://potluck-planner1.herokuapp.com/
+Hosted Backend URL: https://potluck-api43.herokuapp.com/
 
 Endpoints that require an authorization token:
 
