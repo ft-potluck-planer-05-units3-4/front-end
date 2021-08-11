@@ -16,7 +16,7 @@ export const signUp = (user) => {
       console.log(user);
       api.post( '/auth/register', user )
         .then( res => {
-          dispatch( { type: SIGNUP_SUCESS, payload: res.data.username } );
+          // dispatch( { type: SIGNUP_SUCESS, payload: res.data.username } ); // res.data.username doesnt exist, and I don't really know what you're trying to do here
           console.log( res.data );
    })
         return {type:SIGNUP_LOADING};
