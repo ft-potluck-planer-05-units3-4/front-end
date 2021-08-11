@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Switch, Route, Link, Redirect } from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Inviting from "./Inviting";
 import EventsList from "./EventsList";
@@ -63,7 +63,7 @@ function Protected(props) {
         </Switch>
       </main>
     </>
-  )
+  );
 };
 
 export default Protected;
