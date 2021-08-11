@@ -19,18 +19,19 @@ const Signup = () => {
 
   const onSubmit = (evt) => {
     evt.preventDefault();
-    dispatch(signUp(formData));
-    // console.log("FormData:",formData);
-    //     const loginCreds = {
-    //       username: formData.username.trim (),
-    //       password: formData.password.trim (),
-    //     };
-    // console.log("LoginCreds:",loginCreds);
+    console.log(formData);
+    const credentials = {
+      name: formData.name.trim(),
+      username: formData.username.trim(),
+      password: formData.password.trim()
+    };
+    dispatch(signUp(credentials));
+    console.log(credentials);
     // props.loginUser (loginCreds);
   };
 
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <input
         value={name}
         onChange={(e)=> updateFormData(e)}
@@ -54,7 +55,7 @@ const Signup = () => {
         name="password"
         required
       />
-      <button onClick={onSubmit} type="submit">
+      <button type="submit">
         Submit
       </button>
     </form>

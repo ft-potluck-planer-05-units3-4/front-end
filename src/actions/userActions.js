@@ -9,16 +9,15 @@ export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const LOGIN_LOADING = 'LOGIN_LOADING';
 
 const api = axios.create( {
-  baseURL: "https://potluck-planner1.herokuapp.com",
- 
+  baseURL: "https://potluck-api43.herokuapp.com",
 } );
 export const signUp = (user) => {
     return (dispatch) => {
-        console.log(user)
-   api.post( '/auth/register', user )
-     .then( res => {
-       dispatch( { type: SIGNUP_SUCESS, payload: res.data.username } )
-       console.log( res.data );
+      console.log(user);
+      api.post( '/auth/register', user )
+        .then( res => {
+          dispatch( { type: SIGNUP_SUCESS, payload: res.data.username } );
+          console.log( res.data );
    })
         return {type:SIGNUP_LOADING};
     }
