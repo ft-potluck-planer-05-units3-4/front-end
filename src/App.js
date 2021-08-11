@@ -11,7 +11,6 @@ import {
 import rootReducer from './reducers';
 
 import PrivateRoute from './utils/privateRoute';
-import Signup from './components/Signup';
 import Protected from './components/Protected';
 import Unprotected from './components/Unprotected';
 const store = createStore( rootReducer, applyMiddleware( ReduxThunk ) );
@@ -22,7 +21,7 @@ function App() {
       <Router>
         <Switch>
           <PrivateRoute path="/protected" component={Protected}/>
-          <Route path="/" component={Signup} />
+          <Route path="/" component={Unprotected} />
         </Switch>
       </Router>
     </Provider>
