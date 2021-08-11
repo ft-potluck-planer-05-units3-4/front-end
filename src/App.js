@@ -10,21 +10,20 @@ import {
 } from 'redux';
 import rootReducer from './reducers';
 
-// import PrivateRoute from './utils/privateRoute';
-import Nav from './components/Nav';
+import PrivateRoute from './utils/privateRoute';
 import Signup from './components/Signup';
+import Protected from './components/Protected';
+import Unprotected from './components/Unprotected';
 const store = createStore( rootReducer, applyMiddleware( ReduxThunk ) );
 
 function App() {
   return (
     <Provider store={store}>
       <Router>
-        <div className="App">
-          <Switch>
-            <Route path="/signup" component={Signup} />
-            <Route path="/" component={Nav} />
-          </Switch>
-        </div>
+        <Switch>
+          <PrivateRoute path="/protected" component={Protected}/>
+          <Route path="/" component={Signup} />
+        </Switch>
       </Router>
     </Provider>
   );

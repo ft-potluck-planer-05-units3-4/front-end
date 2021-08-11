@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../Styles/signup.css";
+import "../styles/signup.css";
 import { connect } from "react-redux";
 import { loginUser } from "../actions/userActions";
 import { useHistory } from "react-router";
