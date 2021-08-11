@@ -19,15 +19,12 @@ const Signup = () => {
 
   const onSubmit = (evt) => {
     evt.preventDefault();
-    console.log(formData);
     const credentials = {
       name: formData.name.trim(),
       username: formData.username.trim(),
       password: formData.password.trim()
     };
     dispatch(signUp(credentials));
-    console.log(credentials);
-    // props.loginUser (loginCreds);
   };
 
   return (
@@ -38,6 +35,7 @@ const Signup = () => {
         name='name'
         type='text'
         placeholder='Name'
+        required
       />
       <input
         value={username}
